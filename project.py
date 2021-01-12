@@ -1,4 +1,5 @@
 #import tkinter
+#import pickle
 #from tkinter import tk
 #mainWin = tkinter.Tk()
 #mainWin.title("Untitled")
@@ -15,17 +16,18 @@ class Subject:
         self.faculty = faculty
         self.keystage = keystage
     
-class Class():
+class Class:
     def __init__(self,ClassID,SubjectID,numPups):
         self.ClassID = ClassID
         self.SubjectID = Subject(SubjectID)
         self.numpups = numpups
 
-def addsub():
-    English = Subject("English","Language","KS4")
 
-def addclass():
-    test = Class("9y1",test,30)
+#
+subid = 1234
+inpname = input ("Name of subject ")
+inpfaculty = input ("Enter Faculty ")
+inpkeystage = input ("Enter Key Stage ")
 
-
-
+subject = Subject(subid,inpname,inpfaculty,inpkeystage)
+print (subject.name)
