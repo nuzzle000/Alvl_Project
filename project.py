@@ -29,6 +29,12 @@ class Period:
         self.TOD = TOD
         self.DOW = DOW
 
+class Teacher:
+    def __init__(self,TeacherID,surname,firstname):
+        self.TeacherID = TeacherID
+        self.surname = surname
+        self.firstname = firstname
+
 #Enter Subject Details
 subid = "1234"
 inpname = input ("Name of subject: ")
@@ -62,3 +68,16 @@ x = Period(periodid,inpTOD,inpDOW)
 print (x.PeriodID + " was entered successfully")
 print (x.TOD + " was entered successfully")
 print (x.DOW + " was entered successfully")
+
+#Enter Teacher Details
+teacherid = "CMI"
+inpfirstname = input ("Enter teacher first name: ")
+inpsurname = input ("Enter teacher surname: ")
+
+x = Teacher(teacherid,inpsurname,inpfirstname)
+
+print (x.TeacherID)
+print (x.surname)
+print (x.firstname)
+
+#Enter Learner Details
