@@ -23,6 +23,11 @@ class Class:
         self.SubjectID = SubjectID
         self.numPups = numPups
 
+class Period:
+    def __init__(self,PeriodID,TOD,DOW):
+        self.PeriodID = PeriodID
+        self.TOD = TOD
+        self.DOW = DOW
 
 #Enter Subject Details
 subid = "1234"
@@ -40,8 +45,20 @@ print (x.keystage + " was entered successfully")
 #Enter Class Details
 classid = "9Y1"
 inpPup = input ("Number of pupils: ")
-y = Class(classid,subid,inpPup)
 
-print (y.ClassID + " was entered successfully")
-print (y.SubjectID + " was entered successfully")
-print (y.numPups + " was entered successfully")
+x = Class(classid,subid,inpPup)
+
+print (x.ClassID + " was entered successfully")
+print (x.SubjectID + " was entered successfully")
+print (x.numPups + " was entered successfully")
+
+#Enter Period Details
+periodid = "1"
+inpTOD = input("Enter time of day: ")
+inpDOW = input("Enter day of week: ")
+
+x = Period(periodid,inpTOD,inpDOW)
+
+print (x.PeriodID + " was entered successfully")
+print (x.TOD + " was entered successfully")
+print (x.DOW + " was entered successfully")
