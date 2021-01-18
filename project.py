@@ -9,6 +9,7 @@
 
 #mainWin.mainloop()
 
+#Creating classes for information storage
 class Subject:
     def __init__(self,SubjectID,name,faculty,keystage):
         self.SubjectID = SubjectID
@@ -19,15 +20,28 @@ class Subject:
 class Class:
     def __init__(self,ClassID,SubjectID,numPups):
         self.ClassID = ClassID
-        self.SubjectID = Subject(SubjectID)
-        self.numpups = numpups
+        self.SubjectID = SubjectID
+        self.numPups = numPups
 
 
-#
-subid = 1234
-inpname = input ("Name of subject ")
+#Enter Subject Details
+subid = "1234"
+inpname = input ("Name of subject: ")
 inpfaculty = input ("Enter Faculty ")
 inpkeystage = input ("Enter Key Stage ")
 
-subject = Subject(subid,inpname,inpfaculty,inpkeystage)
-print (subject.name)
+x = Subject(subid,inpname,inpfaculty,inpkeystage)
+
+print (x.name + " was entered successfully")
+print (x.SubjectID + " was entered successfully")
+print (x.faculty + " was entered successfully")
+print (x.keystage + " was entered successfully")
+
+#Enter Class Details
+classid = "9Y1"
+inpPup = input ("Number of pupils: ")
+y = Class(classid,subid,inpPup)
+
+print (y.ClassID + " was entered successfully")
+print (y.SubjectID + " was entered successfully")
+print (y.numPups + " was entered successfully")
