@@ -1,5 +1,5 @@
 #import tkinter
-#import pickle
+import pickle
 #from tkinter import tk
 #mainWin = tkinter.Tk()
 #mainWin.title("Untitled")
@@ -8,6 +8,10 @@
 #btn1 = tkinter.Button(mainWin, text="Hello").pack()
 
 #mainWin.mainloop()
+
+#Global Variables
+global subid
+subid = ""
 
 #Creating classes for information storage
 class Subject:
@@ -50,36 +54,57 @@ class Learner:
     def printall(self):
         print(self.LearnerID, self.Custom1)
 
+class Plan:
+    def __init__(self,PlanID,LessonID,Text):
+        self.PlanID = PlanID
+        self.LessonID = LessonID
+        self.Text = Text
+    def printall(self):
+        print(self.PlanID, self.LessonID, self.Text)
+
 #Enter Subject Details
-subid = "1234"
-inpname = input ("Name of subject: ")
-inpfaculty = input ("Enter Faculty: ")
-inpkeystage = input ("Enter Key Stage: ")
-x = Subject(subid,inpname,inpfaculty,inpkeystage)
-x.printall()
+def addsubject():
+    subid = "1234"
+    inpname = input ("Name of subject: ")
+    inpfaculty = input ("Enter Faculty: ")
+    inpkeystage = input ("Enter Key Stage: ")
+    x = Subject(subid,inpname,inpfaculty,inpkeystage)
+    x.printall()
 
 #Enter Class Details
-classid = "9Y1"
-inpPup = input ("Number of pupils: ")
-x = AcademicClass(classid,subid,inpPup)
-x.printall()
+def addacaclass():
+    classid = "9Y1"
+    inpPup = input ("Number of pupils: ")
+    x = AcademicClass(classid,subid,inpPup)
+    x.printall()
 
 #Enter Period Details
-periodid = "1"
-inpTOD = input("Enter time of day: ")
-inpDOW = input("Enter day of week: ")
-x = Period(periodid,inpTOD,inpDOW)
-x.printall()
+def addperiod():
+    periodid = "1"
+    inpTOD = input("Enter time of day: ")
+    inpDOW = input("Enter day of week: ")
+    x = Period(periodid,inpTOD,inpDOW)
+    x.printall()
 
 #Enter Teacher Details
-teacherid = "CMI"
-inpfirstname = input ("Enter teacher first name: ")
-inpsurname = input ("Enter teacher surname: ")
-x = Teacher(teacherid,inpsurname,inpfirstname)
-x.printall()
+def addteacher():
+    teacherid = "CMI"
+    inpfirstname = input ("Enter teacher first name: ")
+    inpsurname = input ("Enter teacher surname: ")
+    x = Teacher(teacherid,inpsurname,inpfirstname)
+    x.printall()
 
 #Enter Learner Details
-inpcustom1 = input("Enter custom information: ")
-learnerid="1234"
-x = Learner(learnerid,inpcustom1)
-x.printall()
+def addlearner():
+    inpcustom1 = input("Enter custom information: ")
+    learnerid="1234"
+    x = Learner(learnerid,inpcustom1)
+    x.printall()
+
+#Enter Plan Details
+def addplan():
+    planid = "1234"
+    lessonid = "5678"
+    inptext = input("Enter plan details: ")
+    x = Plan(planid,lessonid,inptext)
+    x.printall()
