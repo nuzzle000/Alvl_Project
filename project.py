@@ -12,6 +12,16 @@ import pickle
 #Global Variables
 global subid
 subid = ""
+global classid
+classid = ""
+global teacherid
+teacherid = ""
+global periodid
+periodid = ""
+global planid
+planid = ""
+global lessonid
+lessonid = ""
 
 #Creating classes for information storage
 class Subject:
@@ -62,8 +72,21 @@ class Plan:
     def printall(self):
         print(self.PlanID, self.LessonID, self.Text)
 
+class Lesson:
+    def __init__(self,LessonID,Location,ClassID,SubjectID,TeacherID,PeriodID,PlanID):
+        self.LessonID = LessonID
+        self.Location = Location
+        self.ClassID = ClassID
+        self.SubjectID = SubjectID
+        self.TeacherID = TeacherID
+        self.PeriodID = PeriodID
+        self.PlanID = PlanID
+    def printall(self):
+        print(self.LessonID, self.Location, self.ClassID, self.SubjectID, self.TeacherID, self.PeriodID, self.PlanID)
+
 #Enter Subject Details
 def addsubject():
+    global subid
     subid = "1234"
     inpname = input ("Name of subject: ")
     inpfaculty = input ("Enter Faculty: ")
@@ -73,6 +96,7 @@ def addsubject():
 
 #Enter Class Details
 def addacaclass():
+    global classid
     classid = "9Y1"
     inpPup = input ("Number of pupils: ")
     x = AcademicClass(classid,subid,inpPup)
@@ -80,6 +104,7 @@ def addacaclass():
 
 #Enter Period Details
 def addperiod():
+    global periodid
     periodid = "1"
     inpTOD = input("Enter time of day: ")
     inpDOW = input("Enter day of week: ")
@@ -88,6 +113,7 @@ def addperiod():
 
 #Enter Teacher Details
 def addteacher():
+    global teacherid
     teacherid = "CMI"
     inpfirstname = input ("Enter teacher first name: ")
     inpsurname = input ("Enter teacher surname: ")
@@ -103,8 +129,29 @@ def addlearner():
 
 #Enter Plan Details
 def addplan():
+    global planid
+    global lessonid
     planid = "1234"
     lessonid = "5678"
     inptext = input("Enter plan details: ")
     x = Plan(planid,lessonid,inptext)
     x.printall()
+
+#Enter Lesson Details
+def addlesson():
+    global lessonid
+    lessonid = "1234"
+    inplocation = input ("Enter lesson location: ")
+
+    x = Lesson(lessonid,inplocation,classid,subid,teacherid,periodid,planid)
+    
+    x.printall()
+
+#Testing
+addsubject()
+addacaclass()
+addperiod()
+addteacher()
+addlearner()
+addplan()
+addlesson()
