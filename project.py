@@ -16,68 +16,70 @@ class Subject:
         self.name = name
         self.faculty = faculty
         self.keystage = keystage
+    def printall(self):
+        print(self.SubjectID, self.name, self.faculty, self.keystage)
     
-class Class:
+class AcademicClass:
     def __init__(self,ClassID,SubjectID,numPups):
         self.ClassID = ClassID
         self.SubjectID = SubjectID
         self.numPups = numPups
+    def printall(self):
+        print(self.ClassID, self.SubjectID, self.numPups)
 
 class Period:
     def __init__(self,PeriodID,TOD,DOW):
         self.PeriodID = PeriodID
         self.TOD = TOD
         self.DOW = DOW
+    def printall(self):
+        print(self.PeriodID, self.TOD, self.DOW)
 
 class Teacher:
     def __init__(self,TeacherID,surname,firstname):
         self.TeacherID = TeacherID
         self.surname = surname
         self.firstname = firstname
+    def printall(self):
+        print(self.TeacherID, self.surname, self.firstname)
+
+class Learner:
+    def __init__(self,LearnerID,Custom1):
+        self.LearnerID = LearnerID
+        self.Custom1 = Custom1
+    def printall(self):
+        print(self.LearnerID, self.Custom1)
 
 #Enter Subject Details
 subid = "1234"
 inpname = input ("Name of subject: ")
-inpfaculty = input ("Enter Faculty ")
-inpkeystage = input ("Enter Key Stage ")
-
+inpfaculty = input ("Enter Faculty: ")
+inpkeystage = input ("Enter Key Stage: ")
 x = Subject(subid,inpname,inpfaculty,inpkeystage)
-
-print (x.name + " was entered successfully")
-print (x.SubjectID + " was entered successfully")
-print (x.faculty + " was entered successfully")
-print (x.keystage + " was entered successfully")
+x.printall()
 
 #Enter Class Details
 classid = "9Y1"
 inpPup = input ("Number of pupils: ")
-
-x = Class(classid,subid,inpPup)
-
-print (x.ClassID + " was entered successfully")
-print (x.SubjectID + " was entered successfully")
-print (x.numPups + " was entered successfully")
+x = AcademicClass(classid,subid,inpPup)
+x.printall()
 
 #Enter Period Details
 periodid = "1"
 inpTOD = input("Enter time of day: ")
 inpDOW = input("Enter day of week: ")
-
 x = Period(periodid,inpTOD,inpDOW)
-
-print (x.PeriodID + " was entered successfully")
-print (x.TOD + " was entered successfully")
-print (x.DOW + " was entered successfully")
+x.printall()
 
 #Enter Teacher Details
 teacherid = "CMI"
 inpfirstname = input ("Enter teacher first name: ")
 inpsurname = input ("Enter teacher surname: ")
-
 x = Teacher(teacherid,inpsurname,inpfirstname)
-
-print (x.TeacherID)
-print (x.surname)
-print (x.firstname)
+x.printall()
 
 #Enter Learner Details
+inpcustom1 = input("Enter custom information: ")
+learnerid="1234"
+x = Learner(learnerid,inpcustom1)
+x.printall()
