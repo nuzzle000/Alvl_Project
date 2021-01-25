@@ -87,7 +87,7 @@ class Lesson:
 #Enter Subject Details
 def addsubject():
     global subid
-    subid = "1234"
+    subid = "1234" #Will be adjustable
     inpname = input ("Name of subject: ")
     inpfaculty = input ("Enter Faculty: ")
     inpkeystage = input ("Enter Key Stage: ")
@@ -97,15 +97,16 @@ def addsubject():
 #Enter Class Details
 def addacaclass():
     global classid
-    classid = "9Y1"
+    inpclassid = input ("Enter name of class eg.9Y1 : ")
     inpPup = input ("Number of pupils: ")
-    x = AcademicClass(classid,subid,inpPup)
+    x = AcademicClass(inpclassid,subid,inpPup)
     x.printall()
 
 #Enter Period Details
 def addperiod():
+    periodtime = ["0900","1000","1100","1200"] #Will be adjustable
     global periodid
-    periodid = "1"
+    periodid = periodtime.index(input("Enter time of lesson: "))+1
     inpTOD = input("Enter time of day: ")
     inpDOW = input("Enter day of week: ")
     x = Period(periodid,inpTOD,inpDOW)
@@ -114,7 +115,7 @@ def addperiod():
 #Enter Teacher Details
 def addteacher():
     global teacherid
-    teacherid = "CMI"
+    teacherid = "CMI" #Will be adjustable
     inpfirstname = input ("Enter teacher first name: ")
     inpsurname = input ("Enter teacher surname: ")
     x = Teacher(teacherid,inpsurname,inpfirstname)
@@ -123,7 +124,7 @@ def addteacher():
 #Enter Learner Details
 def addlearner():
     inpcustom1 = input("Enter custom information: ")
-    learnerid="1234"
+    learnerid="1234" #Will be adjustable
     x = Learner(learnerid,inpcustom1)
     x.printall()
 
@@ -131,8 +132,8 @@ def addlearner():
 def addplan():
     global planid
     global lessonid
-    planid = "1234"
-    lessonid = "5678"
+    planid = "1234" #Will be adjustable
+    lessonid = "5678" #Will be adjustable
     inptext = input("Enter plan details: ")
     x = Plan(planid,lessonid,inptext)
     x.printall()
@@ -140,7 +141,7 @@ def addplan():
 #Enter Lesson Details
 def addlesson():
     global lessonid
-    lessonid = "1234"
+    lessonid = "1234" #Will be adjustable
     inplocation = input ("Enter lesson location: ")
 
     x = Lesson(lessonid,inplocation,classid,subid,teacherid,periodid,planid)
