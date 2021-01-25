@@ -93,6 +93,10 @@ def addsubject():
     inpkeystage = input ("Enter Key Stage: ")
     x = Subject(subid,inpname,inpfaculty,inpkeystage)
     x.printall()
+    fh = open("subjects.p","wb")
+    pickle.dump(subid,fh)
+    fh.close()
+
 
 #Enter Class Details
 def addacaclass():
