@@ -93,18 +93,27 @@ def addsubject():
     inpkeystage = input ("Enter Key Stage: ")
     x = Subject(subid,inpname,inpfaculty,inpkeystage)
     x.printall()
+    subjects = []
+    subjects.append(Subject(subid,inpname,inpfaculty,inpkeystage))
     fh = open("subjects.p","wb")
-    pickle.dump(subid,fh)
+    pickle.dump(subjects,fh)
     fh.close()
 
 
 #Enter Class Details
 def addacaclass():
-    global classid
+    global inpclassid
     inpclassid = input ("Enter name of class eg.9Y1 : ")
     inpPup = input ("Number of pupils: ")
     x = AcademicClass(inpclassid,subid,inpPup)
     x.printall()
+    acaclasses = []
+    acaclasses.append(AcademicClass(inpclassid,subid,inpPup))
+    fh = open("class.p","wb")
+    pickle.dump(acaclasses,fh)
+    fh.close()
+    
+    
 
 #Enter Period Details
 def addperiod():
@@ -115,6 +124,9 @@ def addperiod():
     inpDOW = input("Enter day of week: ")
     x = Period(periodid,inpTOD,inpDOW)
     x.printall()
+    fh = open("period.p","wb")
+    pickle.dump(periodid,fh)
+    fh.close()
 
 #Enter Teacher Details
 def addteacher():
@@ -124,6 +136,9 @@ def addteacher():
     inpsurname = input ("Enter teacher surname: ")
     x = Teacher(teacherid,inpsurname,inpfirstname)
     x.printall()
+    fh = open("teachers.p","wb")
+    pickle.dump(teacherid,fh)
+    fh.close()
 
 #Enter Learner Details
 def addlearner():
@@ -131,7 +146,9 @@ def addlearner():
     learnerid="1234" #Will be adjustable
     x = Learner(learnerid,inpcustom1)
     x.printall()
-
+    fh = open("learner.p","wb")
+    pickle.dump(learnerid,fh)
+    fh.close()
 #Enter Plan Details
 def addplan():
     global planid
@@ -141,16 +158,20 @@ def addplan():
     inptext = input("Enter plan details: ")
     x = Plan(planid,lessonid,inptext)
     x.printall()
+    fh = open("plan.p","wb")
+    pickle.dump(planid,fh)
+    fh.close()
 
 #Enter Lesson Details
 def addlesson():
     global lessonid
     lessonid = "1234" #Will be adjustable
     inplocation = input ("Enter lesson location: ")
-
     x = Lesson(lessonid,inplocation,classid,subid,teacherid,periodid,planid)
-    
     x.printall()
+    fh = open("lesson.p","wb")
+    pickle.dump(lessonid,fh)
+    fh.close()
 
 #Testing
 addsubject()
