@@ -1,13 +1,23 @@
-#import tkinter
+import tkinter
 import pickle
-#from tkinter import tk
-#mainWin = tkinter.Tk()
-#mainWin.title("Untitled")
-#mainWin.geometry("600x600")
+from tkinter import ttk
+mainWin = tkinter.Tk()
+mainWin.title("Teacher Planner - Main Menu")
+mainWin.geometry("600x600")
+tkinter.Button(mainWin, text="Logout").pack()
 
-#btn1 = tkinter.Button(mainWin, text="Hello").pack()
+#TAB Control (Parent)
+TAB_CONTROL = ttk.Notebook(mainWin)
+#TAB 1 - Add Subject
+TAB1 = ttk.Frame(TAB_CONTROL)
+TAB_CONTROL.add(TAB1, text='Tab 1')
 
-#mainWin.mainloop()
+#TAB 2 - Add Academic Class
+TAB2 = ttk.Frame(TAB_CONTROL)
+TAB_CONTROL.add(TAB2, text='Tab 2')
+TAB_CONTROL.pack(expand=1, fill='both')
+
+mainWin.mainloop()
 
 #Global Variables
 global subid
