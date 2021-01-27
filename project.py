@@ -109,7 +109,7 @@ def addacaclass():
     x.printall()
     acaclasses = []
     acaclasses.append(AcademicClass(inpclassid,subid,inpPup))
-    fh = open("class.p","wb")
+    fh = open("classes.p","wb")
     pickle.dump(acaclasses,fh)
     fh.close()
     
@@ -124,8 +124,10 @@ def addperiod():
     inpDOW = input("Enter day of week: ")
     x = Period(periodid,inpTOD,inpDOW)
     x.printall()
-    fh = open("period.p","wb")
-    pickle.dump(periodid,fh)
+    periods = []
+    periods.append(Period(periodid,inpTOD,inpDOW))
+    fh = open("periods.p","wb")
+    pickle.dump(periods,fh)
     fh.close()
 
 #Enter Teacher Details
@@ -136,8 +138,10 @@ def addteacher():
     inpsurname = input ("Enter teacher surname: ")
     x = Teacher(teacherid,inpsurname,inpfirstname)
     x.printall()
+    teachers = []
+    teachers.append(Teacher(teacherid,inpsurname,inpfirstname))
     fh = open("teachers.p","wb")
-    pickle.dump(teacherid,fh)
+    pickle.dump(teachers,fh)
     fh.close()
 
 #Enter Learner Details
@@ -146,8 +150,10 @@ def addlearner():
     learnerid="1234" #Will be adjustable
     x = Learner(learnerid,inpcustom1)
     x.printall()
-    fh = open("learner.p","wb")
-    pickle.dump(learnerid,fh)
+    learners = []
+    learners.append(Learner(learnerid,inpcustom1))
+    fh = open("learners.p","wb")
+    pickle.dump(learners,fh)
     fh.close()
 #Enter Plan Details
 def addplan():
@@ -158,8 +164,10 @@ def addplan():
     inptext = input("Enter plan details: ")
     x = Plan(planid,lessonid,inptext)
     x.printall()
-    fh = open("plan.p","wb")
-    pickle.dump(planid,fh)
+    plans = []
+    plans.append(Plan(planid,lessonid,inptext)) 
+    fh = open("plans.p","wb")
+    pickle.dump(plans,fh)
     fh.close()
 
 #Enter Lesson Details
@@ -169,8 +177,10 @@ def addlesson():
     inplocation = input ("Enter lesson location: ")
     x = Lesson(lessonid,inplocation,classid,subid,teacherid,periodid,planid)
     x.printall()
-    fh = open("lesson.p","wb")
-    pickle.dump(lessonid,fh)
+    lessons = []
+    lessons.append(Lesson(lessonid,inplocation,inpclassid,subid,teacherid,periodid,planid)) 
+    fh = open("lessons.p","wb")
+    pickle.dump(lessons,fh)
     fh.close()
 
 #Testing
