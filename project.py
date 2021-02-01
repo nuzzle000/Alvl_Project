@@ -10,12 +10,16 @@ tkinter.Button(mainWin, text="Logout").pack()
 TAB_CONTROL = ttk.Notebook(mainWin)
 #TAB 1 - Add Subject
 TAB1 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB1, text='Tab 1')
+TAB_CONTROL.add(TAB1, text='Add Subject')
 
 #TAB 2 - Add Academic Class
 TAB2 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB2, text='Tab 2')
+TAB_CONTROL.add(TAB2, text='Add Class')
+#TAB Control - Add All Tabs
 TAB_CONTROL.pack(expand=1, fill='both')
+
+#TAB Name Labels
+ttk.Label(TAB1, text='This is Tab 1').grid(column=0, row=0, padx=10, pady=10)
 
 mainWin.mainloop()
 
