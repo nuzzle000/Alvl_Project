@@ -1,10 +1,10 @@
-import tkinter
+from tkinter import *
 import pickle
 from tkinter import ttk
-mainWin = tkinter.Tk()
+mainWin = Tk()
 mainWin.title("Teacher Planner - Main Menu")
 mainWin.geometry("600x600")
-tkinter.Button(mainWin, text="Logout").pack()
+Button(mainWin, text="Logout").pack()
 
 #TAB Control (Parent)
 TAB_CONTROL = ttk.Notebook(mainWin)
@@ -21,10 +21,9 @@ TAB_CONTROL.add(TAB2, text='Add Class')
 TAB_CONTROL.pack(expand=1, fill='both')
 
 #Enter Subject Details
-def addsubject(inpname,inpfaculty,inpkeystage):
+def addsubject(inpname):
     global subid
     subid = "1234" #Will be adjustable
-    name = inpname
     inpfaculty = input ("Enter Faculty: ")
     inpkeystage = input ("Enter Key Stage: ")
     x = Subject(subid,inpname,inpfaculty,inpkeystage)
@@ -118,8 +117,10 @@ def addlesson():
 
 #TAB Contents
 ttk.Label(TAB1, text='Name of Subject:').grid(column=0,row=0,padx=10,pady=10)
-ttk.Entry(TAB1,textvariable=addsubject(inpname)).grid(column=1,row=0,padx=10,pady=10)
-ttk.Button(TAB1, text='Test Button',command=addsubject).grid(column=2,row=0,padx=10,pady=10)
+subname = StringVar()
+subname.set("")
+ttk.Entry(TAB1,textvariable=subname).grid(column=1,row=0,padx=10,pady=10)
+ttk.Button(TAB1, text='Test Button',command=lambda: addsubject(subname)).grid(column=2,row=0,padx=10,pady=10)
 
 mainWin.mainloop()
 
@@ -197,14 +198,3 @@ class Lesson:
         self.PlanID = PlanID
     def printall(self):
         print(self.LessonID, self.Location, self.ClassID, self.SubjectID, self.TeacherID, self.PeriodID, self.PlanID)
-
-
-
-#Testing
-addsubject()
-addacaclass()
-addperiod()
-addteacher()
-addlearner()
-addplan()
-addlesson()
