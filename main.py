@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from classes import *
 import pickle as pkl
+
 mainWin = Tk()
 mainWin.title("Teacher Planner")
 mainWin.geometry("600x600")
@@ -9,35 +10,27 @@ Button(mainWin, text="Logout").pack()
 
 #TAB Control (Parent)
 TAB_CONTROL = ttk.Notebook(mainWin)
-
 #TAB 1 - Add Subject
 TAB1 = ttk.Frame(TAB_CONTROL)
 TAB_CONTROL.add(TAB1, text='Add Subject')
-
 #TAB 2 - Add Academic Class
 TAB2 = ttk.Frame(TAB_CONTROL)
 TAB_CONTROL.add(TAB2, text='Add Class')
-
 #TAB 3 - Add Period
 TAB3 = ttk.Frame(TAB_CONTROL)
 TAB_CONTROL.add(TAB3, text='Add Periods')
-
 #TAB 4 - Add Teachers
 TAB4 = ttk.Frame(TAB_CONTROL)
 TAB_CONTROL.add(TAB4, text='Add Teachers')
-
 #TAB 5 - Add Learners
 TAB5 = ttk.Frame(TAB_CONTROL)
 TAB_CONTROL.add(TAB5, text='Add Learners')
-
 #TAB 6 - Add Plans
 TAB6 = ttk.Frame(TAB_CONTROL)
 TAB_CONTROL.add(TAB6, text='Enter Learners')
-
 #TAB 7 - Add Lessons
 TAB7 = ttk.Frame(TAB_CONTROL)
 TAB_CONTROL.add(TAB7, text='Enter Lessons')
-
 #TAB Control - Add All Tabs
 TAB_CONTROL.pack(expand=1, fill='both')
 
@@ -152,6 +145,8 @@ ttk.Entry(TAB1,textvariable=keystage).grid(column=1,row=3,padx=10,pady=10)
 ttk.Button(TAB1, text='Enter Details',command=lambda: addsubject()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB2 Contents - Add Academic Class
+with open("subjects.p","rb") as subject_file:
+    data = pkl.load(subject_file)
 ttk.Label(TAB2, text='Class ID:').grid(column=0,row=0,padx=10,pady=10)
 classid = StringVar()
 ttk.Label(TAB2, text='Subject:').grid(column=0,row=1,padx=10,pady=10) #Foreign Key
@@ -159,7 +154,11 @@ ttk.Label(TAB2, text='No. Pupils:').grid(column=0,row=2,padx=10,pady=10)
 pupnum = StringVar()
 
 ttk.Entry(TAB2,textvariable=classid).grid(column=1,row=0,padx=10,pady=10)
-#ttk.Combobox(TAB2,) #Subject Lists
+acaclass_sub = StringVar() 
+sub_data = ttk.Combobox(TAB2,textvariable=acaclass_sub) 
+sub_data['values'] = (subject_file) 
+sub_data.grid(column=1,row=1) 
+sub_data.current() 
 ttk.Entry(TAB2,textvariable=pupnum).grid(column=1,row=2,padx=10,pady=10)
 ttk.Button(TAB2, text='Enter Details',command=lambda: addacaclass()).grid(column=2,row=0,padx=10,pady=10)
 
