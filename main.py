@@ -25,14 +25,11 @@ TAB_CONTROL.pack(expand=1, fill='both')
 
 #Enter Subject Details
 def addsubject():
-    global subid
-    subid = "1234" #Will be adjustable
-    inpfaculty = input ("Enter Faculty: ")
-    inpkeystage = input ("Enter Key Stage: ")
-    x = Subject(subid,subname.get(),inpfaculty,inpkeystage)
+    #global subid
+    x = Subject(subid.get(),subname.get(),faculty.get(),keystage.get())
     x.printall()
     subjects = []
-    subjects.append(Subject(subid,subname.get(),inpfaculty,inpkeystage))
+    subjects.append(Subject(subid.get(),subname.get(),faculty.get(),keystage.get()))
     fh = open("subjects.p","wb")
     pickle.dump(subjects,fh)
     fh.close()
@@ -50,7 +47,7 @@ def addacaclass():
     pickle.dump(acaclasses,fh)
     fh.close()
     
-    #Enter Period Details
+#Enter Period Details
 def addperiod():
     periodtime = ["0900","1000","1100","1200"] #Will be adjustable
     global periodid
@@ -90,6 +87,7 @@ def addlearner():
     fh = open("learners.p","wb")
     pickle.dump(learners,fh)
     fh.close()
+
 #Enter Plan Details
 def addplan():
     global planid
@@ -119,17 +117,26 @@ def addlesson():
     fh.close()
 
 #TAB Contents
-ttk.Label(TAB1, text='Name of Subject:').grid(column=0,row=0,padx=10,pady=10)
+ttk.Label(TAB1, text='Subject ID:').grid(column=0,row=0,padx=10,pady=10)
+subid = StringVar()
+ttk.Label(TAB1, text='Name of Subject:').grid(column=0,row=1,padx=10,pady=10)
 subname = StringVar()
-#subname.set("")
-ttk.Entry(TAB1,textvariable=subname).grid(column=1,row=0,padx=10,pady=10)
+ttk.Label(TAB1, text='Faculty:').grid(column=0,row=2,padx=10,pady=10)
+faculty = StringVar()
+ttk.Label(TAB1, text='Keystage:').grid(column=0,row=3,padx=10,pady=10)
+keystage = StringVar()
+
+ttk.Entry(TAB1,textvariable=subid).grid(column=1,row=0,padx=10,pady=10)
+ttk.Entry(TAB1,textvariable=subname).grid(column=1,row=1,padx=10,pady=10)
+ttk.Entry(TAB1,textvariable=faculty).grid(column=1,row=2,padx=10,pady=10)
+ttk.Entry(TAB1,textvariable=keystage).grid(column=1,row=3,padx=10,pady=10)
 ttk.Button(TAB1, text='Test Button',command=lambda: addsubject()).grid(column=2,row=0,padx=10,pady=10)
 
 mainWin.mainloop()
 
-#Global Variables
-global subid
-subid = ""
+###Global Variables###
+#global subid
+#subid = ""
 global classid
 classid = ""
 global teacherid
