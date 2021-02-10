@@ -1,5 +1,4 @@
 import pickle
-subjects = []
-fh = open("subjects.p","rb")
-subjects.append(pickle.load(fh))
-print(subjects)
+with open("subjects.p","rb") as subject_file:
+    data = pickle.load(subject_file)
+print(data)
