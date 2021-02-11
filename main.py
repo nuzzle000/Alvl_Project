@@ -3,10 +3,14 @@ from tkinter import ttk
 from classes import *
 import pickle as pkl
 
+#Logout
+def logout():
+    print("Logout")
+
 mainWin = Tk()
 mainWin.title("Teacher Planner")
 mainWin.geometry("600x600")
-Button(mainWin, text="Logout").pack()
+Button(mainWin, text="Logout", command=logout).pack()
 
 #TAB Control (Parent)
 TAB_CONTROL = ttk.Notebook(mainWin)
@@ -31,8 +35,18 @@ TAB_CONTROL.add(TAB6, text='Enter Learners')
 #TAB 7 - Add Lessons
 TAB7 = ttk.Frame(TAB_CONTROL)
 TAB_CONTROL.add(TAB7, text='Enter Lessons')
+#TAB 8 - Settings
+TAB8 = ttk.Frame(TAB_CONTROL)
+TAB_CONTROL.add(TAB8, text='Settings')
+
 #TAB Control - Add All Tabs
 TAB_CONTROL.pack(expand=1, fill='both')
+
+#Nested TAB - Test
+TAB_CONTROL2 = ttk.Notebook(TAB8)
+TABA = ttk.Frame(TAB_CONTROL2)
+TAB_CONTROL2.add(TABA, text='Test')
+TAB_CONTROL2.pack(expand=1, fill='both')
 
 ###SUBROUTINES###
 
@@ -157,13 +171,20 @@ ttk.Entry(TAB2,textvariable=classid).grid(column=1,row=0,padx=10,pady=10)
 acaclass_sub = StringVar() 
 sub_data = ttk.Combobox(TAB2,textvariable=acaclass_sub) 
 sub_data['values'] = (subject_file) 
-sub_data.grid(column=1,row=1) 
+sub_data.grid(column=1,row=1,padx=10,pady=10) 
 sub_data.current() 
 ttk.Entry(TAB2,textvariable=pupnum).grid(column=1,row=2,padx=10,pady=10)
 ttk.Button(TAB2, text='Enter Details',command=lambda: addacaclass()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB3 Contents - Add Periods
+ttk.Label(TAB3, text='Time of Period:').grid(column=0,row=0,padx=10,pady=10)
+periodid = StringVar()
+ttk.Label(TAB3, text='Week Day:').grid(column=0,row=1,padx=10,pady=10)
+DOW = StringVar()
 
+ttk.Entry(TAB3,textvariable=periodid).grid(column=1,row=0,padx=10,pady=10)
+ttk.Entry(TAB3,textvariable=DOW).grid(column=1,row=1,padx=10,pady=10)
+ttk.Button(TAB3, text='Enter Details',command=lambda: addperiod()).grid(column=2,row=0,padx=10,pady=10)
 
 mainWin.mainloop()
 
@@ -172,10 +193,10 @@ mainWin.mainloop()
 #subid = ""
 #global classid
 #classid = ""
+#global periodid
+#periodid = ""
 global teacherid
 teacherid = ""
-global periodid
-periodid = ""
 global planid
 planid = ""
 global lessonid
