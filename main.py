@@ -13,40 +13,53 @@ mainWin.geometry("600x600")
 Button(mainWin, text="Logout", command=logout).pack()
 
 #TAB Control (Parent)
-TAB_CONTROL = ttk.Notebook(mainWin)
-#TAB 1 - Add Subject
-TAB1 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB1, text='Add Subject')
-#TAB 2 - Add Academic Class
-TAB2 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB2, text='Add Class')
-#TAB 3 - Add Period
-TAB3 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB3, text='Add Periods')
-#TAB 4 - Add Teachers
-TAB4 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB4, text='Add Teachers')
-#TAB 5 - Add Learners
-TAB5 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB5, text='Add Learners')
-#TAB 6 - Add Plans
-TAB6 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB6, text='Enter Learners')
-#TAB 7 - Add Lessons
-TAB7 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB7, text='Enter Lessons')
-#TAB 8 - Settings
-TAB8 = ttk.Frame(TAB_CONTROL)
-TAB_CONTROL.add(TAB8, text='Settings')
+TAB_CONTROL_MAIN = ttk.Notebook(mainWin)
+TAB8 = ttk.Frame(TAB_CONTROL_MAIN)
+TAB_CONTROL_ADD = ttk.Notebook(TAB8)
 
-#TAB Control - Add All Tabs
-TAB_CONTROL.pack(expand=1, fill='both')
+#TAB 8 - Add Details
+TAB_CONTROL_MAIN.add(TAB8, text='Add Details')
 
 #Nested TAB - Test
-TAB_CONTROL2 = ttk.Notebook(TAB8)
-TABA = ttk.Frame(TAB_CONTROL2)
-TAB_CONTROL2.add(TABA, text='Test')
-TAB_CONTROL2.pack(expand=1, fill='both')
+
+#TABA = ttk.Frame(TAB_CONTROL_ADD)
+#TAB_CONTROL_ADD.add(TABA, text='Add Subject')
+#TAB_CONTROL_ADD.pack(expand=1, fill='both')
+
+#TAB 1 - Add Subject
+TAB1 = ttk.Frame(TAB_CONTROL_ADD)
+TAB_CONTROL_ADD.add(TAB1, text='Add Subject')
+
+#TAB 2 - Add Academic Class
+TAB2 = ttk.Frame(TAB_CONTROL_ADD)
+TAB_CONTROL_ADD.add(TAB2, text='Add Class')
+
+#TAB 3 - Add Period
+TAB3 = ttk.Frame(TAB_CONTROL_ADD)
+TAB_CONTROL_ADD.add(TAB3, text='Add Periods')
+
+#TAB 4 - Add Teachers
+TAB4 = ttk.Frame(TAB_CONTROL_ADD)
+TAB_CONTROL_ADD.add(TAB4, text='Add Teachers')
+
+#TAB 5 - Add Learners
+TAB5 = ttk.Frame(TAB_CONTROL_ADD)
+TAB_CONTROL_ADD.add(TAB5, text='Add Learners')
+
+#TAB 6 - Add Plans
+TAB6 = ttk.Frame(TAB_CONTROL_ADD)
+TAB_CONTROL_ADD.add(TAB6, text='Enter Learners')
+
+#TAB 7 - Add Lessons
+TAB7 = ttk.Frame(TAB_CONTROL_ADD)
+TAB_CONTROL_ADD.add(TAB7, text='Enter Lessons')
+
+
+#TAB Control - Add All Tabs
+TAB_CONTROL_ADD.pack(expand=1, fill='both')
+TAB_CONTROL_MAIN.pack(expand=1, fill='both')
+
+
 
 ###SUBROUTINES###
 
@@ -57,9 +70,11 @@ def addsubject():
     x.printall()
     subjects_data = []
     subjects_data.append(Subject(subid.get(),subname.get(),faculty.get(),keystage.get()))
-    with open("subjects.p","wb") as subject_file:
-        pkl.dump(subjects_data, subject_file)
-
+    #with open("subjects.p","wb") as subject_file:
+        #pkl.dump(subjects_data, subject_file)
+    fh = open("subjects.p","wb")
+    pkl.dump(subjects_data,fh)
+    fh.close()
 #Enter Class Details
 def addacaclass():
     global inpclassid
@@ -67,10 +82,12 @@ def addacaclass():
     inpPup = input ("Number of pupils: ")
     x = AcademicClass(inpclassid,subid,inpPup)
     x.printall()
-    acaclasses = []
-    acaclasses.append(AcademicClass(inpclassid,subid,inpPup))
-    fh = open("classes.p","wb")
-    pkl.dump(acaclasses,fh)
+    acaclasses_data = []
+    acaclasses_data.append(AcademicClass(inpclassid,subid,inpPup))
+    #with open("acaclasses.p","wb") as subject_file:
+        #pkl.dump(acaclasses_data, subject_file)
+    fh = open("acaclasses.p","wb")
+    pkl.dump(acaclasses_data,fh)
     fh.close()
     
 #Enter Period Details
@@ -82,10 +99,12 @@ def addperiod():
     inpDOW = input("Enter day of week: ")
     x = Period(periodid,inpTOD,inpDOW)
     x.printall()
-    periods = []
-    periods.append(Period(periodid,inpTOD,inpDOW))
+    periods_data = []
+    periods_data.append(Period(periodid,inpTOD,inpDOW))
+    #with open("periods.p","wb") as subject_file:
+        #pkl.dump(periods_data, subject_file)
     fh = open("periods.p","wb")
-    pkl.dump(periods,fh)
+    pkl.dump(periods_data,fh)
     fh.close()
 
 #Enter Teacher Details
@@ -96,10 +115,12 @@ def addteacher():
     inpsurname = input ("Enter teacher surname: ")
     x = Teacher(teacherid,inpsurname,inpfirstname)
     x.printall()
-    teachers = []
-    teachers.append(Teacher(teacherid,inpsurname,inpfirstname))
+    teachers_data = []
+    teachers_data.append(Teacher(teacherid,inpsurname,inpfirstname))
+    #with open("teachers.p","wb") as subject_file:
+        #pkl.dump(teachers_data, subject_file)
     fh = open("teachers.p","wb")
-    pkl.dump(teachers,fh)
+    pkl.dump(teachers_data,fh)
     fh.close()
 
 #Enter Learner Details
@@ -108,10 +129,12 @@ def addlearner():
     learnerid="1234" #Will be adjustable
     x = Learner(learnerid,inpcustom1)
     x.printall()
-    learners = []
-    learners.append(Learner(learnerid,inpcustom1))
+    learners_data = []
+    learners_data.append(Learner(learnerid,inpcustom1))
+    #with open("learners.p","wb") as subject_file:
+        #pkl.dump(learners_data, subject_file)
     fh = open("learners.p","wb")
-    pkl.dump(learners,fh)
+    pkl.dump(learners_data,fh)
     fh.close()
 
 #Enter Plan Details
@@ -123,10 +146,12 @@ def addplan():
     inptext = input("Enter plan details: ")
     x = Plan(planid,lessonid,inptext)
     x.printall()
-    plans = []
-    plans.append(Plan(planid,lessonid,inptext)) 
+    plans_data = []
+    plans_data.append(Plan(planid,lessonid,inptext)) 
+    #with open("plans.p","wb") as subject_file:
+        #pkl.dump(plans_data, subject_file)
     fh = open("plans.p","wb")
-    pkl.dump(plans,fh)
+    pkl.dump(plans_data,fh)
     fh.close()
 
 #Enter Lesson Details
@@ -136,10 +161,12 @@ def addlesson():
     inplocation = input ("Enter lesson location: ")
     x = Lesson(lessonid,inplocation,classid,subid,teacherid,periodid,planid)
     x.printall()
-    lessons = []
-    lessons.append(Lesson(lessonid,inplocation,inpclassid,subid,teacherid,periodid,planid)) 
+    lessons_data = []
+    lessons_data.append(Lesson(lessonid,inplocation,inpclassid,subid,teacherid,periodid,planid)) 
+    #with open("lessons.p","wb") as subject_file:
+        #pkl.dump(lessons_data, subject_file)
     fh = open("lessons.p","wb")
-    pkl.dump(lessons,fh)
+    pkl.dump(lessons_data,fh)
     fh.close()
 
 #TAB1 Contents - Add Subject
@@ -159,8 +186,11 @@ ttk.Entry(TAB1,textvariable=keystage).grid(column=1,row=3,padx=10,pady=10)
 ttk.Button(TAB1, text='Enter Details',command=lambda: addsubject()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB2 Contents - Add Academic Class
-with open("subjects.p","rb") as subject_file:
-    data = pkl.load(subject_file)
+try: #IMPROVE
+    with open("subjects.p","rb") as subject_file:
+        data = pkl.load(subject_file)
+except:
+    pass
 ttk.Label(TAB2, text='Class ID:').grid(column=0,row=0,padx=10,pady=10)
 classid = StringVar()
 ttk.Label(TAB2, text='Subject:').grid(column=0,row=1,padx=10,pady=10) #Foreign Key
