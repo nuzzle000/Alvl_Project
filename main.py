@@ -15,14 +15,19 @@ Button(mainWin, text="Logout", command=logout).pack()
 #TAB Control (Parent)
 TAB_CONTROL_MAIN = ttk.Notebook(mainWin)
 TAB8 = ttk.Frame(TAB_CONTROL_MAIN)
-TAB_CONTROL_ADD = ttk.Notebook(TAB8)
 TAB9 = ttk.Frame(TAB_CONTROL_MAIN)
+TABX = ttk.Frame(TAB_CONTROL_MAIN)
+
+TAB_CONTROL_ADD = ttk.Notebook(TAB8)
 
 #TAB 8 - Add Details
 TAB_CONTROL_MAIN.add(TAB8, text='Add Details')
 
 #TAB 9 - View Details
 TAB_CONTROL_MAIN.add(TAB9, text='View Details')
+
+#TAB X - Settings
+TAB_CONTROL_MAIN.add(TABX, text='Settings')
 
 #TAB 1 - Add Subject
 TAB1 = ttk.Frame(TAB_CONTROL_ADD)
@@ -53,7 +58,7 @@ TAB7 = ttk.Frame(TAB_CONTROL_ADD)
 TAB_CONTROL_ADD.add(TAB7, text='Enter Lessons')
 
 
-#TAB Control - Add All Tabs
+#TAB Control - Add Tabs
 TAB_CONTROL_ADD.pack(expand=1, fill='both')
 TAB_CONTROL_MAIN.pack(expand=1, fill='both')
 
@@ -67,7 +72,7 @@ def addsubject():
     x = Subject(subid.get(),subname.get(),faculty.get(),keystage.get())
     x.printall()
     subjects_data = []
-    subjects_data.append(Subject(subid.get(),subname.get(),faculty.get(),keystage.get()))
+    subjects_data.append(x)
     fh = open("subjects.p","wb")
     pkl.dump(subjects_data,fh)
     fh.close()
@@ -79,7 +84,7 @@ def addacaclass():
     x = AcademicClass(inpclassid,subid,inpPup)
     x.printall()
     acaclasses_data = []
-    acaclasses_data.append(AcademicClass(inpclassid,subid,inpPup))
+    acaclasses_data.append(x)
     fh = open("acaclasses.p","wb")
     pkl.dump(acaclasses_data,fh)
     fh.close()
@@ -94,7 +99,7 @@ def addperiod():
     x = Period(periodid,inpTOD,inpDOW)
     x.printall()
     periods_data = []
-    periods_data.append(Period(periodid,inpTOD,inpDOW))
+    periods_data.append(x)
     fh = open("periods.p","wb")
     pkl.dump(periods_data,fh)
     fh.close()
@@ -108,7 +113,7 @@ def addteacher():
     x = Teacher(teacherid,inpsurname,inpfirstname)
     x.printall()
     teachers_data = []
-    teachers_data.append(Teacher(teacherid,inpsurname,inpfirstname))
+    teachers_data.append(x)
     fh = open("teachers.p","wb")
     pkl.dump(teachers_data,fh)
     fh.close()
@@ -120,7 +125,7 @@ def addlearner():
     x = Learner(learnerid,inpcustom1)
     x.printall()
     learners_data = []
-    learners_data.append(Learner(learnerid,inpcustom1))
+    learners_data.append(x)
     fh = open("learners.p","wb")
     pkl.dump(learners_data,fh)
     fh.close()
@@ -135,7 +140,7 @@ def addplan():
     x = Plan(planid,lessonid,inptext)
     x.printall()
     plans_data = []
-    plans_data.append(Plan(planid,lessonid,inptext)) 
+    plans_data.append(x) 
     fh = open("plans.p","wb")
     pkl.dump(plans_data,fh)
     fh.close()
@@ -148,7 +153,7 @@ def addlesson():
     x = Lesson(lessonid,inplocation,classid,subid,teacherid,periodid,planid)
     x.printall()
     lessons_data = []
-    lessons_data.append(Lesson(lessonid,inplocation,inpclassid,subid,teacherid,periodid,planid)) 
+    lessons_data.append(x) 
     fh = open("lessons.p","wb")
     pkl.dump(lessons_data,fh)
     fh.close()
