@@ -3,14 +3,16 @@ from tkinter import ttk
 from classes import *
 import pickle as pkl
 
+
 #Logout
 def logout():
-    print("Logout")
+    mainWin.destroy()
 
 mainWin = Tk()
 mainWin.title("Teacher Planner")
 mainWin.geometry("600x600")
 Button(mainWin, text="Logout", command=logout).pack()
+#mainWin.PhotoImage(file="logo.ico")
 
 #TAB Control (Parent)
 TAB_CONTROL_MAIN = ttk.Notebook(mainWin)
@@ -51,11 +53,11 @@ TAB_CONTROL_ADD.add(TAB5, text='Add Learners')
 
 #TAB 6 - Add Plans
 TAB6 = ttk.Frame(TAB_CONTROL_ADD)
-TAB_CONTROL_ADD.add(TAB6, text='Enter Learners')
+TAB_CONTROL_ADD.add(TAB6, text='Add Plans')
 
 #TAB 7 - Add Lessons
 TAB7 = ttk.Frame(TAB_CONTROL_ADD)
-TAB_CONTROL_ADD.add(TAB7, text='Enter Lessons')
+TAB_CONTROL_ADD.add(TAB7, text='Add Lessons')
 
 
 #TAB Control - Add Tabs
@@ -204,6 +206,26 @@ DOW = StringVar()
 ttk.Entry(TAB3,textvariable=periodid).grid(column=1,row=0,padx=10,pady=10)
 ttk.Entry(TAB3,textvariable=DOW).grid(column=1,row=1,padx=10,pady=10)
 ttk.Button(TAB3, text='Enter Details',command=lambda: addperiod()).grid(column=2,row=0,padx=10,pady=10)
+
+#TAB4 Contents - Add Teacher Details
+ttk.Label(TAB4, text='First Name:').grid(column=0, row=0, padx=10, pady=10)
+FN = StringVar()
+ttk.Label(TAB4, text='Last Name:').grid(column=0, row=1, padx=10, pady=10)
+SN = StringVar()
+
+ttk.Entry(TAB4, textvariable=FN).grid(column=1, row=0, padx=10, pady=10)
+ttk.Entry(TAB4, textvariable=SN).grid(column=1, row=1, padx=10, pady=10)
+ttk.Button(TAB4, text='Enter Details').grid(column=2,row=0,padx=10,pady=10)
+
+#TAB5 Contents - Add Learner Details
+ttk.Label(TAB5, text='Learner ID:').grid(column=0,row=0,padx=10,pady=10)
+LearnerID = StringVar()
+ttk.Label(TAB5, text='Details:').grid(column=0,row=1,padx=10,pady=10)
+LearnerDet = StringVar()
+
+ttk.Entry(TAB5, textvariable=LearnerID).grid(column=1,row=0,padx=10,pady=10)
+Text(TAB5).grid(column=1,row=1,padx=50,pady=10)
+
 
 mainWin.mainloop()
 
