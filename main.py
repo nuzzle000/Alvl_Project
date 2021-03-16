@@ -225,6 +225,7 @@ LearnerDet = StringVar()
 
 ttk.Entry(TAB5, textvariable=LearnerID).grid(column=1,row=0,padx=10,pady=10)
 Text(TAB5, width=50, height=20, wrap=WORD).grid(column=1,row=1,padx=10,pady=10)
+ttk.Button(TAB5, text='Enter Details').grid(column=2,row=0,padx=10,pady=10)
 
 #TAB6 Contents - Add Plan Details
 ttk.Label(TAB6, text='Select Lesson:').grid(column=0,row=0,padx=10,pady=10)
@@ -232,22 +233,29 @@ ttk.Label(TAB6, text='Enter Plan:').grid(column=0,row=1,padx=10,pady=10)
 
 ttk.Combobox(TAB6).grid(column=1,row=0,padx=10,pady=10)
 Text(TAB6, width=50, height=20, wrap=WORD).grid(column=1,row=1,padx=10,pady=10)
+ttk.Button(TAB6, text='Enter Details').grid(column=2,row=0,padx=10,pady=10)
 
 #TAB7 Contents - Add Lesson Details
 ttk.Label(TAB7, text='Add Location:').grid(column=0,row=0,padx=10,pady=10)
+LocationID=StringVar()
 ttk.Label(TAB7, text='Add Class ID:').grid(column=0,row=1,padx=10,pady=10)
+AcaClassID=StringVar()
 ttk.Label(TAB7, text='Add Subject ID:').grid(column=0,row=2,padx=10,pady=10)
+SubjectID=StringVar()
 ttk.Label(TAB7, text='Add Teacher ID:').grid(column=0,row=3,padx=10,pady=10)
+TeacherID=StringVar()
 ttk.Label(TAB7, text='Add Period ID:').grid(column=0,row=4,padx=10,pady=10)
+PeriodID=StringVar()
 ttk.Label(TAB7, text='Add Plan ID:').grid(column=0,row=5,padx=10,pady=10)
+PlanID=StringVar()
 
-ttk.Entry(TAB7, textvariable=).grid(column=1,row=0,padx=10,pady=10)
-ttk.Entry(TAB7, textvaraible=).grid(column=1,row=1,padx=10,pady=10)
-ttk.Entry(TAB7, textvaraible=).grid(column=1,row=2,padx=10,pady=10)
-ttk.Entry(TAB7, textvaraible=).grid(column=1,row=3,padx=10,pady=10)
-ttk.Entry(TAB7, textvaraible=).grid(column=1,row=4,padx=10,pady=10)
-ttk.Entry(TAB7, textvaraible=).grid(column=1,row=5,padx=10,pady=10)
-
+ttk.Entry(TAB7, textvariable=LocationID).grid(column=1,row=0,padx=10,pady=10)
+ttk.Entry(TAB7, textvariable=AcaClassID).grid(column=1,row=1,padx=10,pady=10)
+ttk.Entry(TAB7, textvariable=SubjectID).grid(column=1,row=2,padx=10,pady=10)
+ttk.Entry(TAB7, textvariable=TeacherID).grid(column=1,row=3,padx=10,pady=10)
+ttk.Entry(TAB7, textvariable=PeriodID).grid(column=1,row=4,padx=10,pady=10)
+ttk.Entry(TAB7, textvariable=PlanID).grid(column=1,row=5,padx=10,pady=10)
+ttk.Button(TAB7, text='Enter Details').grid(column=2,row=0,padx=10,pady=10)
 mainWin.mainloop()
 
 ###Global Variables###
@@ -257,9 +265,9 @@ mainWin.mainloop()
 #classid = ""
 #global periodid
 #periodid = ""
-global teacherid
-teacherid = ""
-global planid
-planid = ""
-global lessonid
-lessonid = ""
+#global teacherid
+#teacherid = ""
+#global planid
+#planid = ""
+#global lessonid
+#lessonid = ""
