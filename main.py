@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from classes import *
 import pickle as pkl
+import datetime as dt
+from tkcalendar import Calendar
 
 
 #Logout
@@ -21,6 +23,7 @@ TAB9 = ttk.Frame(TAB_CONTROL_MAIN)
 TABX = ttk.Frame(TAB_CONTROL_MAIN)
 
 TAB_CONTROL_ADD = ttk.Notebook(TAB8)
+TAB_CONTROL_VIEW = ttk.Notebook(TAB9)
 
 #TAB 8 - Add Details
 TAB_CONTROL_MAIN.add(TAB8, text='Add Details')
@@ -59,11 +62,15 @@ TAB_CONTROL_ADD.add(TAB6, text='Add Plans')
 TAB7 = ttk.Frame(TAB_CONTROL_ADD)
 TAB_CONTROL_ADD.add(TAB7, text='Add Lessons')
 
+#TAB 10 - View Time Table 
+TAB10 = ttk.Frame(TAB_CONTROL_VIEW)
+TAB_CONTROL_VIEW.add(TAB10, text='View Time Table')
+
 
 #TAB Control - Add Tabs
 TAB_CONTROL_ADD.pack(expand=1, fill='both')
 TAB_CONTROL_MAIN.pack(expand=1, fill='both')
-
+TAB_CONTROL_VIEW.pack(expand=1, fill='both')
 
 
 ###SUBROUTINES###
@@ -80,10 +87,10 @@ def addsubject():
     fh.close()
 #Enter Class Details
 def addacaclass():
-    global inpclassid
-    inpclassid = input ("Enter name of class eg.9Y1 : ")
-    inpPup = input ("Number of pupils: ")
-    x = AcademicClass(inpclassid,subid,inpPup)
+    #global inpclassid
+    #inpclassid = input ("Enter name of class eg.9Y1 : ")
+    #inpPup = input ("Number of pupils: ")
+    x = AcademicClass(AcaClassID.get(),SubjectID.get(),pupnum.get())
     x.printall()
     acaclasses_data = []
     acaclasses_data.append(x)
@@ -94,11 +101,11 @@ def addacaclass():
 #Enter Period Details
 def addperiod():
     periodtime = ["0900","1000","1100","1200"] #Will be adjustable
-    global periodid
-    periodid = periodtime.index(input("Enter time of lesson: "))+1
+    #global periodid
+    #periodid = periodtime.index(input("Enter time of lesson: "))+1
     inpTOD = input("Enter time of day: ")
-    inpDOW = input("Enter day of week: ")
-    x = Period(periodid,inpTOD,inpDOW)
+    #inpDOW = input("Enter day of week: ")
+    x = Period(periodid.get(),inpTOD,DOW.get())
     x.printall()
     periods_data = []
     periods_data.append(x)
@@ -108,11 +115,11 @@ def addperiod():
 
 #Enter Teacher Details
 def addteacher():
-    global teacherid
+    #global teacherid
     teacherid = "CMI" #Will be adjustable
-    inpfirstname = input ("Enter teacher first name: ")
-    inpsurname = input ("Enter teacher surname: ")
-    x = Teacher(teacherid,inpsurname,inpfirstname)
+    #inpfirstname = input ("Enter teacher first name: ")
+    #inpsurname = input ("Enter teacher surname: ")
+    x = Teacher(TeacherID.get(),SN.get(),FN.get())
     x.printall()
     teachers_data = []
     teachers_data.append(x)
@@ -122,9 +129,9 @@ def addteacher():
 
 #Enter Learner Details
 def addlearner():
-    inpcustom1 = input("Enter custom information: ")
-    learnerid="1234" #Will be adjustable
-    x = Learner(learnerid,inpcustom1)
+    #inpcustom1 = input("Enter custom information: ")
+    #learnerid="1234" #Will be adjustable
+    x = Learner(LearnerID.get(),LearnerDet.get())
     x.printall()
     learners_data = []
     learners_data.append(x)
@@ -134,12 +141,12 @@ def addlearner():
 
 #Enter Plan Details
 def addplan():
-    global planid
-    global lessonid
-    planid = "1234" #Will be adjustable
+    #global planid
+    #global lessonid
+    #planid = "1234" #Will be adjustable
     lessonid = "5678" #Will be adjustable
-    inptext = input("Enter plan details: ")
-    x = Plan(planid,lessonid,inptext)
+    #inptext = input("Enter plan details: ")
+    x = Plan(PlanID.get(),lessonid,PlanDet.get())
     x.printall()
     plans_data = []
     plans_data.append(x) 
@@ -149,16 +156,31 @@ def addplan():
 
 #Enter Lesson Details
 def addlesson():
-    global lessonid
+    #global lessonid
     lessonid = "1234" #Will be adjustable
-    inplocation = input ("Enter lesson location: ")
-    x = Lesson(lessonid,inplocation,classid,subid,teacherid,periodid,planid)
+    #inplocation = input ("Enter lesson location: ")
+    x = Lesson(lessonid,LocationID.get(),AcaClassID.get(),SubjectID.get(),TeacherID.get(),periodid.get(),PlanID.get())
     x.printall()
     lessons_data = []
     lessons_data.append(x) 
     fh = open("lessons.p","wb")
     pkl.dump(lessons_data,fh)
     fh.close()
+
+#View TimeTable
+def viewtimetable():
+    cal = Calendar(TAB10, selectmode='none')
+    date = cal.datetime.today() + cal.timedelta(days=2)
+    cal.calevent_create(date, 'Hello World', 'message')
+    cal.calevent_create(date, 'Reminder 2', 'reminder')
+    cal.calevent_create(date + cal.timedelta(days=-2), 'Reminder 1', 'reminder')
+    cal.calevent_create(date + cal.timedelta(days=3), 'Message', 'message')
+
+    cal.tag_config('reminder', background='red', foreground='yellow')
+
+    #cal.pack(fill="both", expand=True)
+    cal.grid(column=2,row=2)
+    #ttk.Label(TAB10, text="Hover over the events.").pack()
 
 #TAB1 Contents - Add Subject
 ttk.Label(TAB1, text='Subject ID:').grid(column=0,row=0,padx=10,pady=10)
@@ -215,7 +237,7 @@ SN = StringVar()
 
 ttk.Entry(TAB4, textvariable=FN).grid(column=1, row=0, padx=10, pady=10)
 ttk.Entry(TAB4, textvariable=SN).grid(column=1, row=1, padx=10, pady=10)
-ttk.Button(TAB4, text='Enter Details').grid(column=2,row=0,padx=10,pady=10)
+ttk.Button(TAB4, text='Enter Details',command=lambda: addteacher()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB5 Contents - Add Learner Details
 ttk.Label(TAB5, text='Learner ID:').grid(column=0,row=0,padx=10,pady=10)
@@ -225,15 +247,16 @@ LearnerDet = StringVar()
 
 ttk.Entry(TAB5, textvariable=LearnerID).grid(column=1,row=0,padx=10,pady=10)
 Text(TAB5, width=50, height=20, wrap=WORD).grid(column=1,row=1,padx=10,pady=10)
-ttk.Button(TAB5, text='Enter Details').grid(column=2,row=0,padx=10,pady=10)
+ttk.Button(TAB5, text='Enter Details',command=lambda: addlearner()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB6 Contents - Add Plan Details
 ttk.Label(TAB6, text='Select Lesson:').grid(column=0,row=0,padx=10,pady=10)
 ttk.Label(TAB6, text='Enter Plan:').grid(column=0,row=1,padx=10,pady=10)
+PlanDet = StringVar()
 
 ttk.Combobox(TAB6).grid(column=1,row=0,padx=10,pady=10)
 Text(TAB6, width=50, height=20, wrap=WORD).grid(column=1,row=1,padx=10,pady=10)
-ttk.Button(TAB6, text='Enter Details').grid(column=2,row=0,padx=10,pady=10)
+ttk.Button(TAB6, text='Enter Details',command=lambda: addplan()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB7 Contents - Add Lesson Details
 ttk.Label(TAB7, text='Add Location:').grid(column=0,row=0,padx=10,pady=10)
@@ -255,7 +278,12 @@ ttk.Entry(TAB7, textvariable=SubjectID).grid(column=1,row=2,padx=10,pady=10)
 ttk.Entry(TAB7, textvariable=TeacherID).grid(column=1,row=3,padx=10,pady=10)
 ttk.Entry(TAB7, textvariable=PeriodID).grid(column=1,row=4,padx=10,pady=10)
 ttk.Entry(TAB7, textvariable=PlanID).grid(column=1,row=5,padx=10,pady=10)
-ttk.Button(TAB7, text='Enter Details').grid(column=2,row=0,padx=10,pady=10)
+ttk.Button(TAB7, text='Enter Details',command=lambda: addlesson()).grid(column=2,row=0,padx=10,pady=10)
+
+#TAB10 Contents - Time Table
+ttk.Label(TAB10, text='Time Table').grid(column=0,row=0)
+#ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=1,row=1)
+viewtimetable()
 mainWin.mainloop()
 
 ###Global Variables###
