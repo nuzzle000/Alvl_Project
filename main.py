@@ -5,7 +5,6 @@ import pickle as pkl
 import datetime as dt
 from tkcalendar import Calendar
 
-
 #Logout
 def logout():
     mainWin.destroy()
@@ -83,6 +82,7 @@ def addsubject():
     subjects_data = []
     subjects_data.append(x)
     fh = open("subjects.p","wb")
+    data = [fh]
     pkl.dump(subjects_data,fh)
     fh.close()
 #Enter Class Details
@@ -169,12 +169,12 @@ def addlesson():
 
 #View TimeTable
 def viewtimetable():
-    cal = Calendar(TAB10, selectmode='none')
-    date = cal.datetime.today() + cal.timedelta(days=2)
+    cal = Calendar(TAB10, selectmode='day')
+    date = cal.datetime.today()# + cal.timedelta(days=2)
     cal.calevent_create(date, 'Hello World', 'message')
     cal.calevent_create(date, 'Reminder 2', 'reminder')
     cal.calevent_create(date + cal.timedelta(days=-2), 'Reminder 1', 'reminder')
-    cal.calevent_create(date + cal.timedelta(days=3), 'Message', 'message')
+    cal.calevent_create(date + cal.timedelta(days=-3), '', '')
 
     cal.tag_config('reminder', background='red', foreground='yellow')
 

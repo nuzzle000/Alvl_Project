@@ -1,6 +1,6 @@
 from tkinter import ttk
 from tkcalendar import Calendar
-cal = Calendar(TAB10, selectmode='none')
+cal = Calendar(top, selectmode='none')
 date = cal.datetime.today() + cal.timedelta(days=2)
 cal.calevent_create(date, 'Hello World', 'message')
 cal.calevent_create(date, 'Reminder 2', 'reminder')
