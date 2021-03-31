@@ -15,7 +15,7 @@ mainWin.geometry("600x600")
 Button(mainWin, text="Logout", command=logout).pack()
 #mainWin.PhotoImage(file="logo.ico")
 
-#TAB Control (Parent)
+# TAB Control (Parent)
 TAB_CONTROL_MAIN = ttk.Notebook(mainWin)
 TAB8 = ttk.Frame(TAB_CONTROL_MAIN)
 TAB9 = ttk.Frame(TAB_CONTROL_MAIN)
@@ -78,13 +78,21 @@ TAB_CONTROL_VIEW.pack(expand=1, fill='both')
 def addsubject():
     #global subid
     x = Subject(subid.get(),subname.get(),faculty.get(),keystage.get())
-    x.printall()
-    subjects_data = []
-    subjects_data.append(x)
-    fh = open("subjects.p","wb")
-    data = [fh]
-    pkl.dump(subjects_data,fh)
-    fh.close()
+    try:
+        fh = open('subjects.p','rb')
+        data = pkl.load(fh)
+        fh.close()
+        print(data)
+        data.append(x)
+        print(data)
+        fh = open('subjects.p','wb')
+        pkl.dump(data,fh)
+        fh.close()
+    except:
+        fh = open('subjects.p','wb')
+        pkl.dump(x,fh)
+        print(fh)
+        fh.close()
 #Enter Class Details
 def addacaclass():
     #global inpclassid
@@ -203,7 +211,7 @@ try: #IMPROVE
     with open("subjects.p","rb") as subject_file:
         data = pkl.load(subject_file)
 except:
-    pass
+    data = []
 ttk.Label(TAB2, text='Class ID:').grid(column=0,row=0,padx=10,pady=10)
 classid = StringVar()
 ttk.Label(TAB2, text='Subject:').grid(column=0,row=1,padx=10,pady=10) #Foreign Key
