@@ -3,7 +3,7 @@ from tkinter import ttk
 from classes import *
 import pickle as pkl
 import datetime as dt
-#from tkcalendar import Calendar
+from tkcalendar import Calendar
 
 #Logout
 def logout():
@@ -176,19 +176,19 @@ def addlesson():
     fh.close()
 
 #View TimeTable
-#def viewtimetable():
-    #cal = Calendar(TAB10, selectmode='day')
-    #date = cal.datetime.today()# + cal.timedelta(days=2)
-    #cal.calevent_create(date, 'Hello World', 'message')
-    #cal.calevent_create(date, 'Reminder 2', 'reminder')
-    #cal.calevent_create(date + cal.timedelta(days=-2), 'Reminder 1', 'reminder')
-    #cal.calevent_create(date + cal.timedelta(days=-3), '', '')
+def viewtimetable():
+    cal = Calendar(TAB10, selectmode='day')
+    date = cal.datetime.today()# + cal.timedelta(days=2)
+    cal.calevent_create(date, 'Hello World', 'message')
+    cal.calevent_create(date, 'Reminder 2', 'reminder')
+    cal.calevent_create(date + cal.timedelta(days=-2), 'Reminder 1', 'reminder')
+    cal.calevent_create(date + cal.timedelta(days=-3), '', '')
 
-    #cal.tag_config('reminder', background='red', foreground='yellow')
+    cal.tag_config('reminder', background='red', foreground='yellow')
 
-    #cal.pack(fill="both", expand=True)
-    #cal.grid(column=2,row=2)
-    #ttk.Label(TAB10, text="Hover over the events.").pack()
+    cal.pack(fill="both", expand=True)
+    cal.grid(column=2,row=2)
+    ttk.Label(TAB10, text="Hover over the events.").pack()
 
 #TAB1 Contents - Add Subject
 ttk.Label(TAB1, text='Subject ID:').grid(column=0,row=0,padx=10,pady=10)
@@ -290,8 +290,8 @@ ttk.Button(TAB7, text='Enter Details',command=lambda: addlesson()).grid(column=2
 
 #TAB10 Contents - Time Table
 ttk.Label(TAB10, text='Time Table').grid(column=0,row=0)
-#ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=1,row=1)
-#viewtimetable()
+ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=1,row=1)
+viewtimetable()
 mainWin.mainloop()
 
 ###Global Variables###
