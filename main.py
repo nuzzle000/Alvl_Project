@@ -72,7 +72,7 @@ TAB_CONTROL_MAIN.pack(expand=1, fill='both')
 TAB_CONTROL_VIEW.pack(expand=1, fill='both')
 
 
-###SUBROUTINES###
+###SUBROUTINES
 
 #Enter Subject Details
 def addsubject():
