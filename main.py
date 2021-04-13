@@ -3,7 +3,7 @@ from tkinter import ttk
 from classes import *
 import pickle as pkl
 import datetime as dt
-from tkcalendar import Calendar
+#from tkcalendar import Calendar
 
 #Logout
 def logout():
@@ -99,12 +99,21 @@ def addacaclass():
     #inpclassid = input ("Enter name of class eg.9Y1 : ")
     #inpPup = input ("Number of pupils: ")
     x = AcademicClass(AcaClassID.get(),SubjectID.get(),pupnum.get())
-    x.printall()
-    acaclasses_data = []
-    acaclasses_data.append(x)
-    fh = open("acaclasses.p","wb")
-    pkl.dump(acaclasses_data,fh)
-    fh.close()
+    try:
+        fh = open('acalasses.p','rb')
+        data = pkl.load(fh)
+        fh.close()
+        print(data)
+        data.append([x])
+        print(data)
+        fh = open('acalasses.p','wb')
+        pkl.dump(data,fh)
+        fh.close()
+    except FileNotFoundError:
+        fh = open('acalasses.p','wb')
+        pkl.dump(x,fh)
+        print(fh)
+        fh.close()
     
 #Enter Period Details
 def addperiod():
@@ -114,12 +123,21 @@ def addperiod():
     inpTOD = input("Enter time of day: ")
     #inpDOW = input("Enter day of week: ")
     x = Period(periodid.get(),inpTOD,DOW.get())
-    x.printall()
-    periods_data = []
-    periods_data.append(x)
-    fh = open("periods.p","wb")
-    pkl.dump(periods_data,fh)
-    fh.close()
+    try:
+        fh = open('periods.p','rb')
+        data = pkl.load(fh)
+        fh.close()
+        print(data)
+        data.append([x])
+        print(data)
+        fh = open('periods.p','wb')
+        pkl.dump(data,fh)
+        fh.close()
+    except FileNotFoundError:
+        fh = open('periods.p','wb')
+        pkl.dump(x,fh)
+        print(fh)
+        fh.close()
 
 #Enter Teacher Details
 def addteacher():
@@ -128,24 +146,42 @@ def addteacher():
     #inpfirstname = input ("Enter teacher first name: ")
     #inpsurname = input ("Enter teacher surname: ")
     x = Teacher(TeacherID.get(),SN.get(),FN.get())
-    x.printall()
-    teachers_data = []
-    teachers_data.append(x)
-    fh = open("teachers.p","wb")
-    pkl.dump(teachers_data,fh)
-    fh.close()
+    try:
+        fh = open('teachers.p','rb')
+        data = pkl.load(fh)
+        fh.close()
+        print(data)
+        data.append([x])
+        print(data)
+        fh = open('teachers.p','wb')
+        pkl.dump(data,fh)
+        fh.close()
+    except FileNotFoundError:
+        fh = open('teachers.p','wb')
+        pkl.dump(x,fh)
+        print(fh)
+        fh.close()
 
 #Enter Learner Details
 def addlearner():
     #inpcustom1 = input("Enter custom information: ")
     #learnerid="1234" #Will be adjustable
     x = Learner(LearnerID.get(),LearnerDet.get())
-    x.printall()
-    learners_data = []
-    learners_data.append(x)
-    fh = open("learners.p","wb")
-    pkl.dump(learners_data,fh)
-    fh.close()
+    try:
+        fh = open('learners.p','rb')
+        data = pkl.load(fh)
+        fh.close()
+        print(data)
+        data.append([x])
+        print(data)
+        fh = open('learners.p','wb')
+        pkl.dump(data,fh)
+        fh.close()
+    except FileNotFoundError:
+        fh = open('learners.p','wb')
+        pkl.dump(x,fh)
+        print(fh)
+        fh.close()
 
 #Enter Plan Details
 def addplan():
@@ -155,12 +191,21 @@ def addplan():
     lessonid = "5678" #Will be adjustable
     #inptext = input("Enter plan details: ")
     x = Plan(PlanID.get(),lessonid,PlanDet.get())
-    x.printall()
-    plans_data = []
-    plans_data.append(x) 
-    fh = open("plans.p","wb")
-    pkl.dump(plans_data,fh)
-    fh.close()
+    try:
+        fh = open('plans.p','rb')
+        data = pkl.load(fh)
+        fh.close()
+        print(data)
+        data.append([x])
+        print(data)
+        fh = open('plans.p','wb')
+        pkl.dump(data,fh)
+        fh.close()
+    except FileNotFoundError:
+        fh = open('plans.p','wb')
+        pkl.dump(x,fh)
+        print(fh)
+        fh.close()
 
 #Enter Lesson Details
 def addlesson():
@@ -168,27 +213,30 @@ def addlesson():
     lessonid = "1234" #Will be adjustable
     #inplocation = input ("Enter lesson location: ")
     x = Lesson(lessonid,LocationID.get(),AcaClassID.get(),SubjectID.get(),TeacherID.get(),periodid.get(),PlanID.get())
-    x.printall()
-    lessons_data = []
-    lessons_data.append(x) 
-    fh = open("lessons.p","wb")
-    pkl.dump(lessons_data,fh)
-    fh.close()
+    try:
+        fh = open('lessons.p','rb')
+        data = pkl.load(fh)
+        fh.close()
+        print(data)
+        data.append([x])
+        print(data)
+        fh = open('lessons.p','wb')
+        pkl.dump(data,fh)
+        fh.close()
+    except FileNotFoundError:
+        fh = open('lessons.p','wb')
+        pkl.dump(x,fh)
+        print(fh)
+        fh.close()
 
 #View TimeTable
 def viewtimetable():
-    cal = Calendar(TAB10, selectmode='day')
-    date = cal.datetime.today()# + cal.timedelta(days=2)
-    cal.calevent_create(date, 'Hello World', 'message')
-    cal.calevent_create(date, 'Reminder 2', 'reminder')
-    cal.calevent_create(date + cal.timedelta(days=-2), 'Reminder 1', 'reminder')
-    cal.calevent_create(date + cal.timedelta(days=-3), '', '')
+    pass
 
-    cal.tag_config('reminder', background='red', foreground='yellow')
 
-    cal.pack(fill="both", expand=True)
-    cal.grid(column=2,row=2)
-    ttk.Label(TAB10, text="Hover over the events.").pack()
+
+
+
 
 #TAB1 Contents - Add Subject
 ttk.Label(TAB1, text='Subject ID:').grid(column=0,row=0,padx=10,pady=10)
@@ -288,10 +336,11 @@ ttk.Entry(TAB7, textvariable=PeriodID).grid(column=1,row=4,padx=10,pady=10)
 ttk.Entry(TAB7, textvariable=PlanID).grid(column=1,row=5,padx=10,pady=10)
 ttk.Button(TAB7, text='Enter Details',command=lambda: addlesson()).grid(column=2,row=0,padx=10,pady=10)
 
-#TAB10 Contents - Time Table
+#TAB10 Contents - View Time Table
 ttk.Label(TAB10, text='Time Table').grid(column=0,row=0)
 ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=1,row=1)
-viewtimetable()
+
+#viewtimetable()
 mainWin.mainloop()
 
 ###Global Variables###
