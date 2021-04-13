@@ -83,12 +83,12 @@ def addsubject():
         data = pkl.load(fh)
         fh.close()
         print(data)
-        data.append(x)
+        data.append([x])
         print(data)
         fh = open('subjects.p','wb')
         pkl.dump(data,fh)
         fh.close()
-    except:
+    except FileNotFoundError:
         fh = open('subjects.p','wb')
         pkl.dump(x,fh)
         print(fh)
