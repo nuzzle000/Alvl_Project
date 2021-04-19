@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from classes import *
 import pickle as pkl
-import datetime as dt
+#import datetime as dt
 #from tkcalendar import Calendar
 
 #Logout
@@ -76,21 +76,28 @@ TAB_CONTROL_VIEW.pack(expand=1, fill='both')
 
 #Enter Subject Details
 def addsubject():
-    #global subid
-    x = Subject(subid.get(),subname.get(),faculty.get(),keystage.get())
+    try:
+        fh = open('subjects.p','rb')
+        data = pkl.load(fh)
+        fh.close()
+        subid = data[-1].SubjectID + 1
+    except FileNotFoundError:
+        subid = 0000
+    
+    x = Subject(subid,subname.get(),faculty.get(),keystage.get())
     try:
         fh = open('subjects.p','rb')
         data = pkl.load(fh)
         fh.close()
         print(data)
-        data.append([x])
+        data.append(x)
         print(data)
         fh = open('subjects.p','wb')
         pkl.dump(data,fh)
         fh.close()
     except FileNotFoundError:
         fh = open('subjects.p','wb')
-        pkl.dump(x,fh)
+        pkl.dump([x],fh)
         print(fh)
         fh.close()
 #Enter Class Details
@@ -110,7 +117,10 @@ def addacaclass():
         pkl.dump(data,fh)
         fh.close()
     except FileNotFoundError:
-        fh = open('acalasses.p','wb')
+        fh = open('acalasses.p','wb')#fh = open('subjects.p','rb')
+    #data = pkl.load(fh)
+    #fh.close()
+    #print (data[-1])
         pkl.dump(x,fh)
         print(fh)
         fh.close()
@@ -141,7 +151,10 @@ def addperiod():
 
 #Enter Teacher Details
 def addteacher():
-    #global teacherid
+    #global teacherid#fh = open('subjects.p','rb')
+    #data = pkl.load(fh)
+    #fh.close()
+    #print (data[-1])
     teacherid = "CMI" #Will be adjustable
     #inpfirstname = input ("Enter teacher first name: ")
     #inpsurname = input ("Enter teacher surname: ")
@@ -233,25 +246,21 @@ def addlesson():
 def viewtimetable():
     pass
 
-
-
-
-
-
 #TAB1 Contents - Add Subject
-ttk.Label(TAB1, text='Subject ID:').grid(column=0,row=0,padx=10,pady=10)
-subid = StringVar()
-ttk.Label(TAB1, text='Subject:').grid(column=0,row=1,padx=10,pady=10)
+
+#ttk.Label(TAB1, text='Subject ID:').grid(column=0,row=0,padx=10,pady=10)
+#subid = StringVar()
+ttk.Label(TAB1, text='Subject:').grid(column=0,row=0,padx=10,pady=10)
 subname = StringVar()
-ttk.Label(TAB1, text='Faculty:').grid(column=0,row=2,padx=10,pady=10)
+ttk.Label(TAB1, text='Faculty:').grid(column=0,row=1,padx=10,pady=10)
 faculty = StringVar()
-ttk.Label(TAB1, text='Keystage:').grid(column=0,row=3,padx=10,pady=10)
+ttk.Label(TAB1, text='Keystage:').grid(column=0,row=2,padx=10,pady=10)
 keystage = StringVar()
 
-ttk.Entry(TAB1,textvariable=subid).grid(column=1,row=0,padx=10,pady=10)
-ttk.Entry(TAB1,textvariable=subname).grid(column=1,row=1,padx=10,pady=10)
-ttk.Entry(TAB1,textvariable=faculty).grid(column=1,row=2,padx=10,pady=10)
-ttk.Entry(TAB1,textvariable=keystage).grid(column=1,row=3,padx=10,pady=10)
+#ttk.Entry(TAB1,textvariable=subid).grid(column=1,row=0,padx=10,pady=10)
+ttk.Entry(TAB1,textvariable=subname).grid(column=1,row=0,padx=10,pady=10)
+ttk.Entry(TAB1,textvariable=faculty).grid(column=1,row=1,padx=10,pady=10)
+ttk.Entry(TAB1,textvariable=keystage).grid(column=1,row=2,padx=10,pady=10)
 ttk.Button(TAB1, text='Enter Details',command=lambda: addsubject()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB2 Contents - Add Academic Class
@@ -260,7 +269,7 @@ try: #IMPROVE
         data = pkl.load(subject_file)
 except:
     data = []
-ttk.Label(TAB2, text='Class ID:').grid(column=0,row=0,padx=10,pady=10)
+ttk.Label(TAB2, text='Class ID eg. 9/Y1:').grid(column=0,row=0,padx=10,pady=10)
 classid = StringVar()
 ttk.Label(TAB2, text='Subject:').grid(column=0,row=1,padx=10,pady=10) #Foreign Key
 ttk.Label(TAB2, text='No. Pupils:').grid(column=0,row=2,padx=10,pady=10)
@@ -268,8 +277,14 @@ pupnum = StringVar()
 
 ttk.Entry(TAB2,textvariable=classid).grid(column=1,row=0,padx=10,pady=10)
 acaclass_sub = StringVar() 
-sub_data = ttk.Combobox(TAB2,textvariable=acaclass_sub) 
-sub_data['values'] = (data) 
+sub_data = ttk.Combobox(TAB2,textvariable=acaclass_sub)
+
+#Extracting Subject names into separate list
+displaydata = []
+for item in data:
+    displaydata.append(item.name)
+sub_data['values'] = displaydata
+ 
 sub_data.grid(column=1,row=1,padx=10,pady=10) 
 sub_data.current() 
 ttk.Entry(TAB2,textvariable=pupnum).grid(column=1,row=2,padx=10,pady=10)
@@ -317,15 +332,15 @@ ttk.Button(TAB6, text='Enter Details',command=lambda: addplan()).grid(column=2,r
 #TAB7 Contents - Add Lesson Details
 ttk.Label(TAB7, text='Add Location:').grid(column=0,row=0,padx=10,pady=10)
 LocationID=StringVar()
-ttk.Label(TAB7, text='Add Class ID:').grid(column=0,row=1,padx=10,pady=10)
+ttk.Label(TAB7, text='Add Class:').grid(column=0,row=1,padx=10,pady=10)
 AcaClassID=StringVar()
-ttk.Label(TAB7, text='Add Subject ID:').grid(column=0,row=2,padx=10,pady=10)
+ttk.Label(TAB7, text='Add Subject:').grid(column=0,row=2,padx=10,pady=10)
 SubjectID=StringVar()
-ttk.Label(TAB7, text='Add Teacher ID:').grid(column=0,row=3,padx=10,pady=10)
+ttk.Label(TAB7, text='Add Teacher:').grid(column=0,row=3,padx=10,pady=10)
 TeacherID=StringVar()
-ttk.Label(TAB7, text='Add Period ID:').grid(column=0,row=4,padx=10,pady=10)
+ttk.Label(TAB7, text='Add Period:').grid(column=0,row=4,padx=10,pady=10)
 PeriodID=StringVar()
-ttk.Label(TAB7, text='Add Plan ID:').grid(column=0,row=5,padx=10,pady=10)
+ttk.Label(TAB7, text='Add Plan:').grid(column=0,row=5,padx=10,pady=10)
 PlanID=StringVar()
 
 ttk.Entry(TAB7, textvariable=LocationID).grid(column=1,row=0,padx=10,pady=10)
@@ -337,22 +352,7 @@ ttk.Entry(TAB7, textvariable=PlanID).grid(column=1,row=5,padx=10,pady=10)
 ttk.Button(TAB7, text='Enter Details',command=lambda: addlesson()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB10 Contents - View Time Table
-ttk.Label(TAB10, text='Time Table').grid(column=0,row=0)
-ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=1,row=1)
+timetable = Listbox(TAB10).grid(column=0,row=0)
+ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=0,row=1)
 
-#viewtimetable()
 mainWin.mainloop()
-
-###Global Variables###
-#global subid
-#subid = ""
-#global classid
-#classid = ""
-#global periodid
-#periodid = ""
-#global teacherid
-#teacherid = ""
-#global planid
-#planid = ""
-#global lessonid
-#lessonid = ""
