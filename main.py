@@ -1,8 +1,9 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, filedialog
 from classes import *
 import pickle as pkl
-#import datetime as dt
+import subprocess
+import datetime as dt
 #from tkcalendar import Calendar
 
 #Logout
@@ -202,7 +203,7 @@ def addplan():
     #global lessonid
     #planid = "1234" #Will be adjustable
     lessonid = "5678" #Will be adjustable
-    #inptext = input("Enter plan details: ")
+    #path = filedialog.askopenfilename()
     x = Plan(PlanID.get(),lessonid,PlanDet.get())
     try:
         fh = open('plans.p','rb')
@@ -219,6 +220,10 @@ def addplan():
         pkl.dump(x,fh)
         print(fh)
         fh.close()
+        
+def addplanfile():
+    path = filedialog.askopenfilename()
+    print(path)
 
 #Enter Lesson Details
 def addlesson():
@@ -291,7 +296,7 @@ ttk.Entry(TAB2,textvariable=pupnum).grid(column=1,row=2,padx=10,pady=10)
 ttk.Button(TAB2, text='Enter Details',command=lambda: addacaclass()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB3 Contents - Add Periods
-ttk.Label(TAB3, text='Time of Period:').grid(column=0,row=0,padx=10,pady=10)
+ttk.Label(TAB3, text='Time of Day:').grid(column=0,row=0,padx=10,pady=10)
 periodid = StringVar()
 ttk.Label(TAB3, text='Week Day:').grid(column=0,row=1,padx=10,pady=10)
 DOW = StringVar()
@@ -328,7 +333,7 @@ PlanDet = StringVar()
 ttk.Combobox(TAB6).grid(column=1,row=0,padx=10,pady=10)
 Text(TAB6, width=50, height=20, wrap=WORD).grid(column=1,row=1,padx=10,pady=10)
 ttk.Button(TAB6, text='Enter Details',command=lambda: addplan()).grid(column=2,row=0,padx=10,pady=10)
-
+ttk.Button(TAB6, text='Add File',command=addplanfile).grid(column=2,row=1,padx=10,pady=10)
 #TAB7 Contents - Add Lesson Details
 ttk.Label(TAB7, text='Add Location:').grid(column=0,row=0,padx=10,pady=10)
 LocationID=StringVar()
