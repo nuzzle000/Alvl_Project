@@ -58,3 +58,13 @@ class Lesson:
         self.PlanID = PlanID
     def printall(self):
         print(self.LessonID, self.Location, self.ClassID, self.SubjectID, self.TeacherID, self.PeriodID, self.PlanID)
+    def info(self):
+        info = self.location #, self.ClassID, self.PeriodID)
+        
+# class ID:
+#     def calc(self):
+#         fh = open('subjects.p','rb')
+#         data = pkl.load(fh)
+#         fh.close()
+#         print (data[-1].SubjectID)
+#         print (data[-1].printall())

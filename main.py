@@ -5,14 +5,13 @@ import pickle as pkl
 import subprocess
 import datetime as dt
 #from tkcalendar import Calendar
-
 #Logout
 def logout():
     mainWin.destroy()
 
 mainWin = Tk()
 mainWin.title("Teacher Planner")
-mainWin.geometry("600x600")
+mainWin.geometry("650x600")
 Button(mainWin, text="Logout", command=logout).pack()
 #mainWin.PhotoImage(file="logo.ico")
 
@@ -103,9 +102,6 @@ def addsubject():
         fh.close()
 #Enter Class Details
 def addacaclass():
-    #global inpclassid
-    #inpclassid = input ("Enter name of class eg.9Y1 : ")
-    #inpPup = input ("Number of pupils: ")
     x = AcademicClass(AcaClassID.get(),SubjectID.get(),pupnum.get())
     try:
         fh = open('acalasses.p','rb')
@@ -129,10 +125,6 @@ def addacaclass():
 #Enter Period Details
 def addperiod():
     periodtime = ["0900","1000","1100","1200"] #Will be adjustable
-    #global periodid
-    #periodid = periodtime.index(input("Enter time of lesson: "))+1
-    inpTOD = input("Enter time of day: ")
-    #inpDOW = input("Enter day of week: ")
     x = Period(periodid.get(),inpTOD,DOW.get())
     try:
         fh = open('periods.p','rb')
@@ -152,13 +144,7 @@ def addperiod():
 
 #Enter Teacher Details
 def addteacher():
-    #global teacherid#fh = open('subjects.p','rb')
-    #data = pkl.load(fh)
-    #fh.close()
-    #print (data[-1])
     teacherid = "CMI" #Will be adjustable
-    #inpfirstname = input ("Enter teacher first name: ")
-    #inpsurname = input ("Enter teacher surname: ")
     x = Teacher(TeacherID.get(),SN.get(),FN.get())
     try:
         fh = open('teachers.p','rb')
@@ -178,8 +164,6 @@ def addteacher():
 
 #Enter Learner Details
 def addlearner():
-    #inpcustom1 = input("Enter custom information: ")
-    #learnerid="1234" #Will be adjustable
     x = Learner(LearnerID.get(),LearnerDet.get())
     try:
         fh = open('learners.p','rb')
@@ -199,9 +183,6 @@ def addlearner():
 
 #Enter Plan Details
 def addplan():
-    #global planid
-    #global lessonid
-    #planid = "1234" #Will be adjustable
     lessonid = "5678" #Will be adjustable
     #path = filedialog.askopenfilename()
     x = Plan(PlanID.get(),lessonid,PlanDet.get())
@@ -227,23 +208,21 @@ def addplanfile():
 
 #Enter Lesson Details
 def addlesson():
-    #global lessonid
     lessonid = "1234" #Will be adjustable
-    #inplocation = input ("Enter lesson location: ")
     x = Lesson(lessonid,LocationID.get(),AcaClassID.get(),SubjectID.get(),TeacherID.get(),periodid.get(),PlanID.get())
     try:
         fh = open('lessons.p','rb')
         data = pkl.load(fh)
         fh.close()
         print(data)
-        data.append([x])
+        data.append(x)
         print(data)
         fh = open('lessons.p','wb')
         pkl.dump(data,fh)
         fh.close()
     except FileNotFoundError:
         fh = open('lessons.p','wb')
-        pkl.dump(x,fh)
+        pkl.dump([x],fh)
         print(fh)
         fh.close()
 
@@ -329,11 +308,28 @@ ttk.Button(TAB5, text='Enter Details',command=lambda: addlearner()).grid(column=
 ttk.Label(TAB6, text='Select Lesson:').grid(column=0,row=0,padx=10,pady=10)
 ttk.Label(TAB6, text='Enter Plan:').grid(column=0,row=1,padx=10,pady=10)
 PlanDet = StringVar()
-
-ttk.Combobox(TAB6).grid(column=1,row=0,padx=10,pady=10)
+lesson_plan = StringVar()
+plan_lesson = ttk.Combobox(TAB6,textvariable=lesson_plan)
+plan_lesson.grid(column=1,row=0,padx=10,pady=10)
 Text(TAB6, width=50, height=20, wrap=WORD).grid(column=1,row=1,padx=10,pady=10)
 ttk.Button(TAB6, text='Enter Details',command=lambda: addplan()).grid(column=2,row=0,padx=10,pady=10)
 ttk.Button(TAB6, text='Add File',command=addplanfile).grid(column=2,row=1,padx=10,pady=10)
+try: #IMPROVE
+    with open("lessons.p","rb") as lesson_file:
+        data1 = pkl.load(lesson_file)
+except:
+    data1 = []
+displaydata1 = []
+#try:
+for item in data1:
+    displaydata1.append(item.Location)
+#print(type(plan_lesson))
+plan_lesson['values'] = displaydata1
+plan_lesson.grid(column=1,row=1,padx=10,pady=10) 
+plan_lesson.current()
+#except TypeError:
+#    pass
+
 #TAB7 Contents - Add Lesson Details
 ttk.Label(TAB7, text='Add Location:').grid(column=0,row=0,padx=10,pady=10)
 LocationID=StringVar()
