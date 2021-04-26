@@ -74,7 +74,6 @@ TAB_CONTROL_VIEW.pack(expand=1, fill='both')
 
 ###SUBROUTINES
 
-#Enter Subject Details
 def addsubject():
     try:
         fh = open('subjects.p','rb')
@@ -100,6 +99,7 @@ def addsubject():
         pkl.dump([x],fh)
         print(fh)
         fh.close()
+
 #Enter Class Details
 def addacaclass():
     x = AcademicClass(AcaClassID.get(),SubjectID.get(),pupnum.get())
@@ -305,15 +305,15 @@ Text(TAB5, width=50, height=20, wrap=WORD).grid(column=1,row=1,padx=10,pady=10)
 ttk.Button(TAB5, text='Enter Details',command=lambda: addlearner()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB6 Contents - Add Plan Details
-ttk.Label(TAB6, text='Select Lesson:').grid(column=0,row=0,padx=10,pady=10)
-ttk.Label(TAB6, text='Enter Plan:').grid(column=0,row=1,padx=10,pady=10)
+ttk.Label(TAB6, text='Select Lesson:').grid(column=0,row=1,padx=10,pady=10)
+ttk.Label(TAB6, text='Enter Plan:').grid(column=0,row=0,padx=10,pady=10)
 PlanDet = StringVar()
 lesson_plan = StringVar()
 plan_lesson = ttk.Combobox(TAB6,textvariable=lesson_plan)
-plan_lesson.grid(column=1,row=0,padx=10,pady=10)
-Text(TAB6, width=50, height=20, wrap=WORD).grid(column=1,row=1,padx=10,pady=10)
-ttk.Button(TAB6, text='Enter Details',command=lambda: addplan()).grid(column=2,row=0,padx=10,pady=10)
-ttk.Button(TAB6, text='Add File',command=addplanfile).grid(column=2,row=1,padx=10,pady=10)
+plan_lesson.grid(column=0,row=2,padx=10,pady=10)
+Text(TAB6, width=50, height=20, wrap=WORD).grid(column=1,row=0,padx=10,pady=10)
+ttk.Button(TAB6, text='Enter Details',command=lambda: addplan()).grid(column=3,row=1,padx=10,pady=10)
+ttk.Button(TAB6, text='Add File',command=addplanfile).grid(column=3,row=0,padx=10,pady=10)
 try: #IMPROVE
     with open("lessons.p","rb") as lesson_file:
         data1 = pkl.load(lesson_file)
