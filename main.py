@@ -85,16 +85,19 @@ def addsubject():
         subid = 0000
     
     x = Subject(subid,subname.get(),faculty.get(),keystage.get())
-    valid = False
+    valid = True
     errormsg = ""
     
-    if subname.get() != "":
-        valid = True
+    if subname.get() == "":
+        valid = False
         errormsg += ("Please enter a Subject Name")
     if len(subname.get()) <= 16:
-        valid = True
+        valid = False
         errormsg += ("Max character limit for subject is 16")
-    if subname.get()
+    if subname.get().isalpha():
+        valid = False
+        errormsg += ("Please enter only letters")
+
         try:
             fh = open('subjects.p','rb')
             data = pkl.load(fh)
