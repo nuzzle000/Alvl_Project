@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk, filedialog
+from tkinter import ttk, filedialog, messagebox
 from classes import *
 import pickle as pkl
 import subprocess
@@ -74,6 +74,7 @@ TAB_CONTROL_VIEW.pack(expand=1, fill='both')
 
 ###SUBROUTINES
 
+#Enter Subject Details
 def addsubject():
     try:
         fh = open('subjects.p','rb')
@@ -84,21 +85,33 @@ def addsubject():
         subid = 0000
     
     x = Subject(subid,subname.get(),faculty.get(),keystage.get())
-    try:
-        fh = open('subjects.p','rb')
-        data = pkl.load(fh)
-        fh.close()
-        print(data)
-        data.append(x)
-        print(data)
-        fh = open('subjects.p','wb')
-        pkl.dump(data,fh)
-        fh.close()
-    except FileNotFoundError:
-        fh = open('subjects.p','wb')
-        pkl.dump([x],fh)
-        print(fh)
-        fh.close()
+    valid = False
+    errormsg = ""
+    
+    if subname.get() != "":
+        valid = True
+        errormsg += ("Please enter a Subject Name")
+    if len(subname.get()) <= 16:
+        valid = True
+        errormsg += ("Max character limit for subject is 16")
+    if subname.get()
+        try:
+            fh = open('subjects.p','rb')
+            data = pkl.load(fh)
+            fh.close()
+            print(data)
+            data.append(x)
+            print(data)
+            fh = open('subjects.p','wb')
+            pkl.dump(data,fh)
+            fh.close()
+        except FileNotFoundError:
+            fh = open('subjects.p','wb')
+            pkl.dump([x],fh)
+            print(fh)
+            fh.close()
+    else:
+        messagebox.showinfo(title="oh no", message="numb 'ed")
 
 #Enter Class Details
 def addacaclass():
