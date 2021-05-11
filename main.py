@@ -369,7 +369,20 @@ ttk.Entry(TAB7, textvariable=PlanID).grid(column=1,row=5,padx=10,pady=10)
 ttk.Button(TAB7, text='Enter Details',command=lambda: addlesson()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB10 Contents - View Time Table
-timetable = Listbox(TAB10).grid(column=0,row=0)
-ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=0,row=1)
+timetable_plan = StringVar()
+timetable = Listbox(TAB10).grid(column=1,row=0)
+#ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=0,row=1)
+
+timetable_data = ttk.Combobox(TAB10,textvariable=timetable_plan)
+
+#Extracting Subject names into separate list
+displaydata = []
+for item in data:
+    displaydata.append(item.name)
+sub_data['values'] = displaydata
+ 
+timetable_data.grid(column=0,row=0,padx=10,pady=10) 
+timetable_data.current() 
+
 
 mainWin.mainloop()
