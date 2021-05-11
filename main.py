@@ -369,20 +369,34 @@ ttk.Entry(TAB7, textvariable=PlanID).grid(column=1,row=5,padx=10,pady=10)
 ttk.Button(TAB7, text='Enter Details',command=lambda: addlesson()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB10 Contents - View Time Table
-timetable_plan = StringVar()
-timetable = Listbox(TAB10).grid(column=1,row=0)
-#ttk.Button(TAB10, text="Enter", command=lambda: viewtimetable()).grid(column=0,row=1)
+TimeTable = ttk.Treeview(TAB10)
 
-timetable_data = ttk.Combobox(TAB10,textvariable=timetable_plan)
+# Defining Columns
+TimeTable['columns'] = ("Period","Subject","Class","Location")
 
-#Extracting Subject names into separate list
-displaydata = []
-for item in data:
-    displaydata.append(item.name)
-sub_data['values'] = displaydata
- 
-timetable_data.grid(column=0,row=0,padx=10,pady=10) 
-timetable_data.current() 
+#Format Columns
+TimeTable.column("#0", width=0, stretch=NO)
+TimeTable.column("Period", anchor=CENTER, width=120)
+TimeTable.column("Subject", anchor=W, width=120)
+TimeTable.column("Class", anchor=W, width=120)
+TimeTable.column("Location", anchor=CENTER, width=120)
 
+# Creat Headings
+TimeTable.heading("#0", text="")
+TimeTable.heading("Period", text="Period", anchor=W)
+TimeTable.heading("Subject", text="Subject", anchor=W)
+TimeTable.heading("Class", text="Class", anchor=W)
+TimeTable.heading("Location", text="Location", anchor=W)
+
+# Add Data
+#data = [Lesson.TimeTable]
+count = 0
+for record in Lesson.TimeTable:
+    TimeTable.insert(parent='', index='end', iid=count, values=(Lesson.TimeTable[0],Lesson.TimeTable[1],Lesson.TimeTable[2],Lesson.TimeTable[3]))
+    count += 1
+
+
+
+TimeTable.pack(pady=20)
 
 mainWin.mainloop()

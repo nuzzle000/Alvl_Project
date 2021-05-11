@@ -13,8 +13,8 @@ def resetdata():
         data.append(x) #adding value(s) to array
 
 
-resetdata() #Running above code
-#data = [12,9,32,21,19,25,26]  ###HARDCODE DATA###
+#resetdata() #Running above code
+data = [12,9,32,21,19,25,26]  ###HARDCODE DATA##
 
 print("Current data:", data)
 
@@ -78,7 +78,7 @@ def BinSrcRecursive():
     SearchItem = int(input("What do you want to find?"))
     def Search(data, SearchItem):
         
-        Middle = (start + End)//2
+        Middle = (Start + End)//2
         if data[Middle] == SearchItem:
             print("Found")
         else:
