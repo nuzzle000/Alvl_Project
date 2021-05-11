@@ -1,29 +1,60 @@
 from tkinter import *
 from tkinter import ttk
 
-ws = Tk()
-ws.title('PythonGuides')
-ws.geometry('400x300')
-ws['bg']='#fb0'
+root = Tk()
+root.title('Treeview - Test')
+root.geometry("500x500")
 
-tv = ttk.Treeview(ws)
-tv['columns']=('Rank', 'Name', 'Badge')
-tv.column('#0', width=0, stretch=NO)
-tv.column('Rank', anchor=CENTER, width=80)
-tv.column('Name', anchor=CENTER, width=80)
-tv.column('Badge', anchor=CENTER, width=80)
+my_tree = ttk.Treeview(root)
 
-tv.heading('#0', text='', anchor=CENTER)
-tv.heading('Rank', text='Id', anchor=CENTER)
-tv.heading('Name', text='rank', anchor=CENTER)
-tv.heading('Badge', text='Badge', anchor=CENTER)
+# Defining Columns
+my_tree['columns'] = ("Name", "ID", "Favourite Colour")
 
-tv.insert(parent='', index=0, iid=0, text='', values=('1','Vineet','Alpha'))
-tv.insert(parent='', index=1, iid=1, text='', values=('2','Anil','Bravo'))
-tv.insert(parent='', index=2, iid=2, text='', values=('3','Vinod','Charlie'))
-tv.insert(parent='', index=3, iid=3, text='', values=('4','Vimal','Delta'))
-tv.insert(parent='', index=4, iid=4, text='', values=('5','Manjeet','Echo'))
-tv.pack()
+# Format Columns
+my_tree.column("#0", width=0, minwidth=0, stretch=NO)
+my_tree.column("Name",anchor=W, width=120)
+my_tree.column("ID",anchor=CENTER, width=80)
+my_tree.column("Favourite Colour", anchor=W, width=120)
+
+# Creat Headings
+my_tree.heading("#0", text="", anchor=W)
+my_tree.heading("Name", text="Name",anchor=W)
+my_tree.heading("ID", text="ID", anchor=CENTER)
+my_tree.heading("Favourite Colour", text="Favourite Colour", anchor=W)
+
+# Add Data
+data = [
+    ["John", 1, "Blue"],
+    ["Jack", 2, "Red"],
+    ["James", 3, "Green"],
+    ["Jasmine", 4, "Yellow"],
+    ["Jerry", 5, "White"],
+    ["Jade", 6, "Black"]
+]
 
 
-ws.mainloop()
+count=0
+for record in data:
+    my_tree.insert(parent='', index='end', iid=count, text="", values=(record[0],record[1],record[2]))
+    count += 1
+
+
+
+'''
+my_tree.insert(parent='', index='end', iid=0, text="", values=("John",1, "Blue"))
+my_tree.insert(parent='', index='end', iid=1, text="", values=("Jack",1, "Red"))
+my_tree.insert(parent='', index='end', iid=2, text="", values=("James",1, "Green"))
+my_tree.insert(parent='', index='end', iid=3, text="", values=("Jasmine",1, "Yellow"))
+my_tree.insert(parent='', index='end', iid=4, text="", values=("Jerry",1, "White"))
+my_tree.insert(parent='', index='end', iid=5, text="", values=("Jade",1, "Black"))
+'''
+
+# Add Child
+#my_tree.insert(parent='0', index='end', iid=6, text="Child", values=("Steve", "1.2", "Cyan"))
+#my_tree.move('6', '0', '0') Alternative to assign parent
+
+# Pack to the screen
+my_tree.pack(pady=20 )
+
+
+root.mainloop()
