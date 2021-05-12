@@ -59,4 +59,4 @@ class Lesson:
     def printall(self):
         print(self.LessonID, self.Location, self.ClassID, self.SubjectID, self.TeacherID, self.PeriodID, self.PlanID)
     def timeTable(self):
-        return [self.PeriodID,self.SubjectID,self.ClassID,self.Location]
+        return [self.PeriodID,self.SubjectID,self.ClassID,self.Location,self.LessonID]

@@ -4,7 +4,8 @@ from classes import *
 import pickle as pkl
 import subprocess
 import datetime as dt
-#from tkcalendar import Calendar
+
+
 #Logout
 def logout():
     mainWin.destroy()
@@ -15,16 +16,15 @@ mainWin.geometry("650x600")
 Button(mainWin, text="Logout", command=logout).pack()
 #mainWin.PhotoImage(file="logo.ico")
 
-def LinearSearch(data):
-    #if data[i].PlanID == 2:
-    for record in data:
+def LinearSearch(data,SearchItem):
         Found = False #Pointer for if data is found
-        SearchItem = input("What do you want to find?")
+        #SearchItem = input("What do you want to find?")
 
         for i in range (0, len(data)-1):
-            if data[i] == SearchItem: #If data found then print found
+            if data[i].LessonID == SearchItem: #need to refer to list inside object
                 Found = True
-                print("Found")
+                print("Found", data[i].PlanID)
+                Text(TAB=10, width=50, height=20, wrap=WORD, text=data[i].Text).grid(column=1,row=0,padx=10,pady=10)
 
         if Found == False: # If data not found print not found
             print("Not Found")
@@ -386,17 +386,27 @@ ttk.Button(TAB7, text='Enter Details',command=lambda: addlesson()).grid(column=2
 
 # Extracting data from selection
 def selectItem(a):
-    curItem = TimeTable.focus()
-    print (TimeTable.item(curItem))
-    LinearSearch(lessons_list)
+    try:
+        fh = open('plans.p','rb')
+        plan_list = pkl.load(fh)
+        fh.close()
+    except FileNotFoundError:
+        pass
+    selected = TimeTable.focus() #Record Number
+    # record values
+    values = TimeTable.item(selected, 'values')
+    print (values[1])
+    LinearSearch(plan_list,values[1])
+
 
 TimeTable = ttk.Treeview(TAB10)
 
 # Defining Columns
-TimeTable['columns'] = ("Period","Subject","Class","Location")
+TimeTable['columns'] = ("LessonID","Period","Subject","Class","Location")
 
 #Format Columns
 TimeTable.column("#0", width=0, stretch=NO)
+TimeTable.column("LessonID", anchor=W, width=120)
 TimeTable.column("Period", anchor=CENTER, width=120)
 TimeTable.column("Subject", anchor=W, width=120)
 TimeTable.column("Class", anchor=W, width=120)
@@ -404,6 +414,7 @@ TimeTable.column("Location", anchor=CENTER, width=120)
 
 # Creat Headings
 TimeTable.heading("#0", text="")
+TimeTable.heading("LessonID", text="ID", anchor=W)
 TimeTable.heading("Period", text="Period", anchor=W)
 TimeTable.heading("Subject", text="Subject", anchor=W)
 TimeTable.heading("Class", text="Class", anchor=W)
@@ -420,7 +431,7 @@ except FileNotFoundError:
 count = 0
 for record in lessons_list:
     tt = record.timeTable()
-    TimeTable.insert(parent='', index='end', iid=count, text="", values=(tt[0],tt[1],tt[2],tt[3]))
+    TimeTable.insert(parent='', index='end', iid=count, text="", values=(tt[4],tt[0],tt[1],tt[2],tt[3]))
     count += 1
 
 #Assigning button press to extract data
