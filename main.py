@@ -15,6 +15,20 @@ mainWin.geometry("650x600")
 Button(mainWin, text="Logout", command=logout).pack()
 #mainWin.PhotoImage(file="logo.ico")
 
+def LinearSearch(data):
+    #if data[i].PlanID == 2:
+    for record in data:
+        Found = False #Pointer for if data is found
+        SearchItem = input("What do you want to find?")
+
+        for i in range (0, len(data)-1):
+            if data[i] == SearchItem: #If data found then print found
+                Found = True
+                print("Found")
+
+        if Found == False: # If data not found print not found
+            print("Not Found")
+
 # TAB Control (Parent)
 TAB_CONTROL_MAIN = ttk.Notebook(mainWin)
 TAB8 = ttk.Frame(TAB_CONTROL_MAIN)
@@ -369,6 +383,13 @@ ttk.Entry(TAB7, textvariable=PlanID).grid(column=1,row=5,padx=10,pady=10)
 ttk.Button(TAB7, text='Enter Details',command=lambda: addlesson()).grid(column=2,row=0,padx=10,pady=10)
 
 #TAB10 Contents - View Time Table
+
+# Extracting data from selection
+def selectItem(a):
+    curItem = TimeTable.focus()
+    print (TimeTable.item(curItem))
+    LinearSearch(lessons_list)
+
 TimeTable = ttk.Treeview(TAB10)
 
 # Defining Columns
@@ -389,15 +410,22 @@ TimeTable.heading("Class", text="Class", anchor=W)
 TimeTable.heading("Location", text="Location", anchor=W)
 
 # Add Data
-#data = Lesson.TimeTable()
-print(Lesson.timeTable())
+try:
+    fh = open('lessons.p','rb')
+    lessons_list = pkl.load(fh)
+    fh.close()
+except FileNotFoundError:
+    pass
+
 count = 0
-for record in Lesson.timeTable():
-    TimeTable.insert(parent='', index='end', iid=count, text="", values=(record[0],record[1],record[2],record[3]))
+for record in lessons_list:
+    tt = record.timeTable()
+    TimeTable.insert(parent='', index='end', iid=count, text="", values=(tt[0],tt[1],tt[2],tt[3]))
     count += 1
 
-
-
+#Assigning button press to extract data
+TimeTable.bind('<ButtonRelease-1>', selectItem)
 TimeTable.pack(pady=20)
+
 
 mainWin.mainloop()
