@@ -389,10 +389,11 @@ TimeTable.heading("Class", text="Class", anchor=W)
 TimeTable.heading("Location", text="Location", anchor=W)
 
 # Add Data
-#data = [Lesson.TimeTable]
+#data = Lesson.TimeTable()
+print(Lesson.timeTable())
 count = 0
-for record in Lesson.TimeTable:
-    TimeTable.insert(parent='', index='end', iid=count, values=(Lesson.TimeTable[0],Lesson.TimeTable[1],Lesson.TimeTable[2],Lesson.TimeTable[3]))
+for record in Lesson.timeTable():
+    TimeTable.insert(parent='', index='end', iid=count, text="", values=(record[0],record[1],record[2],record[3]))
     count += 1
 
 

@@ -58,5 +58,5 @@ class Lesson:
         self.PlanID = PlanID
     def printall(self):
         print(self.LessonID, self.Location, self.ClassID, self.SubjectID, self.TeacherID, self.PeriodID, self.PlanID)
-    def TimeTable(self):
-        data = [self.PeriodID,Subject.name,self.ClassID,self.Location]
+    def timeTable(self):
+        return [self.PeriodID,Subject.name,self.ClassID,self.Location]
