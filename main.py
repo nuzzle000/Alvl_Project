@@ -146,7 +146,7 @@ def addsubject():
             print(fh)
             fh.close()
     else:
-        messagebox.showinfo(title="oh no", message="numb 'ed")
+        messagebox.showinfo(title="Error", message=errormsg)
 
 #Enter Class Details
 def addacaclass():
@@ -231,8 +231,7 @@ def addlearner():
 
 #Enter Plan Details
 def addplan():
-    lessonid = "5678" #Will be adjustable
-    #path = filedialog.askopenfilename()
+    lessonid = "5678" #needs to link to lesson
     x = Plan(PlanID.get(),lessonid,PlanDet.get())
     try:
         fh = open('plans.p','rb')
@@ -257,6 +256,13 @@ def addplanfile():
 #Enter Lesson Details
 def addlesson():
     lessonid = "1234" #Will be adjustable
+    #try:
+        #fh = open('subjects.p','rb')
+        #data = pkl.load(fh)
+        #fh.close()
+        #subid = data[-1].SubjectID + 1
+    #except FileNotFoundError:
+        #subid = 0000
     x = Lesson(lessonid,LocationID.get(),AcaClassID.get(),SubjectID.get(),TeacherID.get(),periodid.get(),PlanID.get())
     try:
         fh = open('lessons.p','rb')
