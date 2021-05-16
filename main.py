@@ -414,7 +414,7 @@ def selectItem(a):
     # record values
     values = TimeTable.item(selected, 'values')
     print (values[1])
-    LinearSearch(plan_list,values[1])
+    BinSrcRecursive(plan_list,values[1])
 
 
 TimeTable = ttk.Treeview(TAB10)
