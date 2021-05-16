@@ -16,18 +16,36 @@ mainWin.geometry("650x600")
 Button(mainWin, text="Logout", command=logout).pack()
 #mainWin.PhotoImage(file="logo.ico")
 
-def LinearSearch(data,SearchItem):
-        Found = False #Pointer for if data is found
-        #SearchItem = input("What do you want to find?")
+def BubbleSort():
+    n = len(data) # Gets length of array
+    Sort = False
+    while n != 1: #While length is not reduced to 1:
+        print("***",data)
+        for i in range (0, n-1):
+            print(data)
+            if data[i] > data[i + 1]: #Comparing 2 bits of data in array
+                Temp = data[i]
+                data[i] = data[i + 1]
+                data[i + 1] = Temp
+                Sort = True
+        n = n - 1 #Reduce length to be sorted by 1
+    if Sort == True:
+        print(data)
 
-        for i in range (0, len(data)-1):
-            if data[i].LessonID == SearchItem: #need to refer to list inside object
-                Found = True
-                print("Found", data[i].PlanID)
-                Text(TAB=10, width=50, height=20, wrap=WORD, text=data[i].Text).grid(column=1,row=0,padx=10,pady=10)
+def BinSrcRecursive(data,SearchItem):
+    BubbleSort()
+    Start = 0
+    End = int(len(data))-1
+    SearchItem = int(input("What do you want to find?"))
+    def Search(data, SearchItem):
 
-        if Found == False: # If data not found print not found
-            print("Not Found")
+        Middle = (Start + End)//2
+        if data[Middle] == SearchItem:
+            print("Found")
+        else:
+            Search(data, SearchItem)
+
+    Search(data, SearchItem)
 
 # TAB Control (Parent)
 TAB_CONTROL_MAIN = ttk.Notebook(mainWin)
